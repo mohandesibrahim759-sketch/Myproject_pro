@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ابراهيم المخلافي - مطور ويب محترف</title>
+    <meta name="description" content="موقع ابراهيم المخلافي الشخصي - مطور ويب محترف متخصص في تطوير الواجهات الأمامية وتجربة المستخدم">
+    <meta name="keywords" content="ابراهيم المخلافي, مطور ويب, تصميم مواقع, برمجة, frontend developer">
+<!-- أيقونات إضافية -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ابراهيم المخلافي">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ابراهيم المخلافي - مطور ويب محترf">
+    <meta property="og:description" content="مطور ويب محترف متخصص في تطوير الواجهات الأمامية وتجربة المستخدم">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ibrahimmkh.com">
+    <meta property="og:image" content="https://ibrahimmkh.com/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ابراهيم المخلافي - مطور ويب محترف">
+    <meta name="twitter:description" content="مطور ويب محترف متخصص في تطوير الواجهات الأمامية وتجربة المستخدم">
+    <meta name="twitter:image" content="https://ibrahimmkh.com/twitter-image.jpg">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6C63FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ابراهيم المخلافي">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Preload Critical Resources -->
+   
+    <link rel="preload" href="style/style.css" as="style">
+  
+
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style/style.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Load Tajawal from Google Fonts only if reachable; otherwise rely on system/sans-serif fallback -->
+    <script>
+    (function(){
+        const url = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap';
+        const timeout = 3000;
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
+        try {
+            fetch(url, { signal: controller.signal, mode: 'cors' }).then(res=>{
+                clearTimeout(timer);
+                if (res && res.ok) {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = url;
+                    document.head.appendChild(link);
+                } else {
+                    document.documentElement.classList.add('no-remote-fonts');
+                }
+            }).catch(()=>{ document.documentElement.classList.add('no-remote-fonts'); });
+        } catch(e) { document.documentElement.classList.add('no-remote-fonts'); }
+    })();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "ابراهيم المخلافي",
+        "jobTitle": "مطور ويب محترف",
+        "url": "https://ibrahimmkh.com",
+        "sameAs": [
+            "https://github.com/ibrahimmkh",
+            "https://linkedin.com/in/ibrahimmkh"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "مستقل"
+        }
+    }
+    </script>
+    
+  
+</head>
+
+
+
+    <script>
+        // Delegated handlers: login, chat toggle and admin toggle are handled safely only when elements exist.
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e){
+                try {
+                    const loginBtn = e.target.closest && e.target.closest('#loginBtn');
+                    if (loginBtn) {
+                        try { if (window.AppAuth && typeof AppAuth.showAuthModal === 'function') { AppAuth.showAuthModal(); } else if (window.unifiedChatSystem && typeof unifiedChatSystem.showAuthModal === 'function') { unifiedChatSystem.showAuthModal(); } } catch(ex){}
+                        return;
+                    }
+
+                    const chatToggle = e.target.closest && e.target.closest('#chatToggle, .chat-toggle, #chatToggleBtn');
+                    if (chatToggle) {
+                        const authUser = (window.AppAuth && typeof AppAuth.getUser === 'function') ? AppAuth.getUser() : (window.unifiedChatSystem ? window.unifiedChatSystem.currentUser : null);
+                        const requireAuth = (typeof window.REQUIRE_REGISTRATION_FOR_CHAT === 'undefined') ? true : !!window.REQUIRE_REGISTRATION_FOR_CHAT;
+                        if (requireAuth && !authUser) {
+                            try { if (window.AppAuth && typeof AppAuth.showAuthModal === 'function') AppAuth.showAuthModal(); } catch(ex){}
+                            return;
+                        }
+                        if (window.unifiedChatSystem && typeof unifiedChatSystem.toggleChat === 'function') {
+                            try { unifiedChatSystem.toggleChat(); } catch(ex) { console.warn('toggleChat failed', ex); }
+                        }
+                        return;
+                    }
+
+                    const adminBtn = e.target.closest && e.target.closest('#adminAccessBtn, #adminToggle');
+                    if (adminBtn) {
+                        if (window.unifiedChatSystem && typeof unifiedChatSystem.toggleAdminPanel === 'function') {
+                            if (unifiedChatSystem.isAdmin) unifiedChatSystem.toggleAdminPanel();
+                            else { try { if (window.AppAuth) AppAuth.showAuthModal(); } catch(ex){} }
+                        }
+                        return;
+                    }
+                } catch (e) { console.warn('delegated handler error', e); }
+            }, false);
+        });
+    </script>
+<body>
+    <!-- شريط التحميل -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>جاري التحميل...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">ابراهيم <span>المخلافي</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">عنّي</a></li>
+                    <li><a href="#services">خدماتي</a></li>
+                    <li><a href="#skills">المهارات</a></li>
+                    <li><a href="#projects">المشاريع</a></li>
+                    <li><a href="#case-studies">حالات دراسة</a></li>
+                    <li><a href="#testimonials">آراء العملاء</a></li>
+                    <li><a href="#blog">المدونة</a></li>
+                    <li><a href="#store">المتجر</a></li>
+                    <li><a href="#contact">اتصل بي</a></li>
+                </ul>
+                <div class="nav-btns">
+                    <button id="loginBtn" class="btn btn-secondary" style="margin-inline-start:8px">تسجيل/دخول</button>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="#booking" class="btn btn-primary">حجز موعد</a>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 data-aos="fade-left">مرحباً، أنا <span class="highlight">ابراهيم المخلافي</span></h1>
+                    <h2 class="typing-text" data-aos="fade-left" data-aos-delay="200"></h2>
+                    <p data-aos="fade-left" data-aos-delay="400">أقوم بتحويل الأفكار إلى واقع رقمي من خلال تصميم وتطوير مواقع ويب استثنائية تلبي احتياجات المستخدمين وتواكب أحدث التقنيات.</p>
+                    <div class="hero-btns" data-aos="fade-up" data-aos-delay="600">
+                        <a href="#projects" class="btn btn-primary">مشاريعي</a>
+                        <a href="#contact" class="btn btn-secondary">اتصل بي</a>
+                        <a href="#about" class="btn btn-outline">المزيد عني</a>
+                    </div>
+                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="800">
+                        <div class="stat">
+                            <span class="stat-number" data-count="42">0</span>
+                            <span class="stat-label">مشروع مكتمل</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="36">0</span>
+                            <span class="stat-label">عميل سعيد</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="3">0</span>
+                            <span class="stat-label">سنوات خبرة</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-container" data-aos="fade-left" data-aos-delay="400">
+                        <img src="assets/img/1.jpg" alt="ابراهيم المخلافي" class="hero-img" loading="lazy">
+                        <div class="floating-elements">
+                            <div class="floating-element element-1">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="floating-element element-2">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="floating-element element-3">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="floating-element element-4">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <div class="floating-element element-5">
+                                <i class="fab fa-vuejs"></i>
+                            </div>
+                            <div class="floating-element element-6">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>انتقل للأسفل</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">من أنا</h2>
+                <p data-aos="fade-up" data-aos-delay="200">تعرف على المزيد عن رحلتي ومهاراتي</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <div class="image-frame">
+                        <img src="assets/img/1.jpg" alt="ابراهيم المخلافي" loading="lazy">
+                        <div class="experience-badge">
+                            <span class="exp-number">3+</span>
+                            <span class="exp-text">سنوات خبرة</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3 data-aos="fade-left">مطور ويب مبتكر مع شغف للتكنولوجيا</h3>
+                    <p data-aos="fade-left" data-aos-delay="200">أنا مطور ويب محترف مع أكثر من 5 سنوات من الخبرة في تطوير الواجهات الأمامية وتجربة المستخدم. شغفي يكمن في إنشاء حلول رقمية مبتكرة تلبي احتياجات العملاء وتوفر تجربة مستخدم استثنائية.</p>
+                    <p data-aos="fade-left" data-aos-delay="300">أعمل باستمرار على تطوير مهاراتي ومواكبة أحدث التقنيات في مجال تطوير الويب. أؤمن بالتعلم المستمر وأسعى دائمًا لتحسين جودة عملي.</p>
+                    
+                    <div class="about-details">
+                        <div class="detail" data-aos="fade-up" data-aos-delay="100">
+                            <span class="detail-label">الاسم:</span>
+                            <span class="detail-value">ابراهيم المخلافي</span>
+                        </div>
+                        <div class="detail" data-aos="fade-up" data-aos-delay="200">
+                            <span class="detail-label">البريد الإلكتروني:</span>
+                            <span class="detail-value">mohandesibrahim795.com</span>
+                        </div>
+                        <div class="detail" data-aos="fade-up" data-aos-delay="300">
+                            <span class="detail-label">العمر:</span>
+                            <span class="detail-value">21 سنة</span>
+                        </div>
+                        <div class="detail" data-aos="fade-up" data-aos-delay="400">
+                            <span class="detail-label">من:</span>
+                            <span class="detail-value">تعز، اليمن</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-actions" data-aos="fade-up" data-aos-delay="500">
+                        <a href="#" class="btn btn-primary">تحميل السيرة الذاتية</a>
+                        <a href="#contact" class="btn btn-outline">تعاون معي</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">خدماتي</h2>
+                <p data-aos="fade-up" data-aos-delay="200">الحلول التي أقدمها لعملائي</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>تطوير الويب</h3>
+                    <p>أقوم بتطوير مواقع ويب متجاوبة وسريعة باستخدام أحدث التقنيات مثل HTML5, CSS3, JavaScript وReact.</p>
+                    <ul class="service-features">
+                        <li>مواقع متجاوبة</li>
+                        <li>تحسين الأداء</li>
+                        <li>شفرة نظيفة</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price">بدءاً من $500</span>
+                        <a href="#contact" class="btn btn-outline">اطلب الخدمة</a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>تصميم الواجهات</h3>
+                    <p>أصمم واجهات مستخدم جذابة وسهلة الاستخدام تركز على تجربة المستخدم وتحقيق أهداف العمل.</p>
+                    <ul class="service-features">
+                        <li>تصميم حديث</li>
+                        <li>تجربة مستخدم متميزة</li>
+                        <li>واجهات تفاعلية</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price">بدءاً من $300</span>
+                        <a href="#contact" class="btn btn-outline">اطلب الخدمة</a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>تطبيقات الجوال</h3>
+                    <p>أطور تطبيقات جوال متجاوبة تعمل بسلاسة على مختلف الأجهزة والشاشات بمختلف أحجامها.</p>
+                    <ul class="service-features">
+                        <li>تطبيقات هجينة</li>
+                        <li>أداء عالي</li>
+                        <li>تجربة مستخدم متميزة</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price">بدءاً من $800</span>
+                        <a href="#contact" class="btn btn-outline">اطلب الخدمة</a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>تحسين محركات البحث</h3>
+                    <p>أعمل على تحسين مواقع الويب لمحركات البحث لزيادة ظهورها وتحسين ترتيبها في نتائج البحث.</p>
+                    <ul class="service-features">
+                        <li>تحليل الكلمات المفتاحية</li>
+                        <li>تحسين المحتوى</li>
+                        <li>رفع الترتيب</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price">بدءاً من $200/شهر</span>
+                        <a href="#contact" class="btn btn-outline">اطلب الخدمة</a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>تحسين الأداء</h3>
+                    <p>أقوم بتحسين أداء مواقع الويب لتكون أسرع في التحميل وأكثر كفاءة في استخدام الموارد.</p>
+                    <ul class="service-features">
+                        <li>تحسين السرعة</li>
+                        <li>تحسين SEO</li>
+                        <li>تحسين تجربة المستخدم</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price">بدءاً من $150</span>
+                        <a href="#contact" class="btn btn-outline">اطلب الخدمة</a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>الدعم الفني</h3>
+                    <p>أقدم الدعم الفني المستمر للعملاء لضمان عمل مواقعهم بشكل مثالي وحل أي مشاكل قد تظهر.</p>
+                    <ul class="service-features">
+                        <li>دعم فني مستمر</li>
+                        <li>صيانة دورية</li>
+                        <li>تحديثات مستمرة</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price">بدءاً من $100/شهر</span>
+                        <a href="#contact" class="btn btn-outline">اطلب الخدمة</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">مهاراتي التقنية</h2>
+                <p data-aos="fade-up" data-aos-delay="200">المهارات والخبرات التي أمتلكها</p>
+            </div>
+            <div class="skills-content">
+                <div class="skills-list">
+                    <div class="skill-category" data-aos="fade-right">
+                        <h3>المهارات الأساسية</h3>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML & CSS</span>
+                                <span class="skill-percent">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">Vue.js</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category" data-aos="fade-right" data-aos-delay="200">
+                        <h3>المهارات المتقدمة</h3>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">Node.js</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">MongoDB</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">UI/UX Design</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-info">
+                                <span class="skill-name">Git & GitHub</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-chart" data-aos="fade-left">
+                    <div class="chart-container">
+                        <div class="chart-item">
+                            <div class="chart-circle" data-percent="95">
+                                <span>95%</span>
+                            </div>
+                            <p>Frontend</p>
+                        </div>
+                        <div class="chart-item">
+                            <div class="chart-circle" data-percent="85">
+                                <span>85%</span>
+                            </div>
+                            <p>UI/UX Design</p>
+                        </div>
+                        <div class="chart-item">
+                            <div class="chart-circle" data-percent="75">
+                                <span>75%</span>
+                            </div>
+                            <p>Backend</p>
+                        </div>
+                        <div class="chart-item">
+                            <div class="chart-circle" data-percent="90">
+                                <span>90%</span>
+                            </div>
+                            <p>Problem Solving</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">مشاريعي</h2>
+                <p data-aos="fade-up" data-aos-delay="200">أحدث أعمالي وإنجازاتي</p>
+            </div>
+            <div class="projects-filter" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="web">تطوير الويب</button>
+                <button class="filter-btn" data-filter="design">تصميم</button>
+                <button class="filter-btn" data-filter="mobile">تطبيقات الجوال</button>
+                <button class="filter-btn" data-filter="ecommerce">متاجر إلكترونية</button>
+            </div>
+            <div class="projects-grid">
+                <!-- سيتم ملء المشاريع ديناميكياً عبر JavaScript -->
+            </div>
+            <div class="projects-more" data-aos="fade-up">
+                <a href="#contact" class="btn btn-primary">هل لديك مشروع؟ دعنا نناقشه</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies" id="case-studies">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">حالات دراسة مفصلة</h2>
+                <p data-aos="fade-up" data-aos-delay="200">استكشف قصص نجاح مشاريعي بتفاصيل كاملة</p>
+            </div>
+            
+            <div class="case-studies-grid">
+                <div class="case-study-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="case-study-header">
+                        <h3>موقع متجر إلكتروني - شركة النخبة</h3>
+                        <span class="case-date">يناير 2024</span>
+                    </div>
+                    <div class="case-study-content">
+                        <div class="case-problem">
+                            <h4>المشكلة</h4>
+                            <p>كان الموقع الحالي بطيئاً وغير متجاوب، مع معدل تحويل منخفض لا يتجاوز 1.2%</p>
+                            <div class="before-stats">
+                                <div class="stat">
+                                    <span class="stat-value">4.2s</span>
+                                    <span class="stat-label">وقت التحميل</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">1.2%</span>
+                                    <span class="stat-label">معدل التحويل</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">68%</span>
+                                    <span class="stat-label">معدل الارتداد</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-solution">
+                            <h4>الحل</h4>
+                            <p>قمنا بتصميم وتطوير موقع جديد باستخدام React وNext.js مع تحسين أداء شامل</p>
+                            <ul class="tech-stack">
+                                <li>React</li>
+                                <li>Next.js</li>
+                                <li>Node.js</li>
+                                <li>MongoDB</li>
+                                <li>Cloudflare</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="case-results">
+                            <h4>النتائج</h4>
+                            <div class="after-stats">
+                                <div class="stat">
+                                    <span class="stat-value">0.8s</span>
+                                    <span class="stat-label">وقت التحميل</span>
+                                    <span class="stat-change positive">↑ 81%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">4.7%</span>
+                                    <span class="stat-label">معدل التحويل</span>
+                                    <span class="stat-change positive">↑ 292%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">32%</span>
+                                    <span class="stat-label">معدل الارتداد</span>
+                                    <span class="stat-change positive">↓ 53%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-gallery">
+                            <div class="image-comparison">
+                                <div class="before-after">
+                                    <div class="before">
+                                        <img src="assets/img/R.jfif" alt="قبل التطوير" loading="lazy">
+                                        <span>قبل</span>
+                                    </div>
+                                    <div class="after">
+                                        <img src="assets/img/mmm.png" alt="بعد التطوير" loading="lazy">
+                                        <span>بعد</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-actions">
+                            <a href="#" class="btn btn-primary">عرض المشروع الحي</a>
+                            <a href="#" class="btn btn-outline">رمز GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- يمكن إضافة المزيد من حالات الدراسة هنا -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-aos="fade-up">آراء العملاء</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    ماذا يقول عملاؤنا عن تجربتهم معنا
+                </p>
+            </div>
+
+            <!-- شريط التقدم -->
+            <div class="scroll-progress">
+                <div class="scroll-progress-bar"></div>
+            </div>
+
+            <!-- حاوية آراء العملاء -->
+            <div class="testimonials-wrapper">
+                <div class="testimonials-container">
+                    <!-- سيتم إضافة الآراء ديناميكياً عبر JavaScript -->
+                </div>
+
+                <!-- أزرار التنقل -->
+                <button class="testimonial-nav-btn testimonial-prev">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="testimonial-nav-btn testimonial-next">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- مؤشر الصفحات -->
+                <div class="testimonial-dots">
+                    <!-- سيتم إضافة النقاط ديناميكياً -->
+                </div>
+            </div>
+
+            <!-- نموذج إضافة رأي جديد -->
+            <div class="add-testimonial-section" data-aos="fade-up">
+                <div class="add-testimonial-card">
+                    <h3>أضف رأيك</h3>
+                    <p>شاركنا تجربتك وآرائك حول خدماتنا</p>
+                    
+                    <form id="addTestimonialForm" class="testimonial-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="clientName" class="form-control" required>
+                                <label for="clientName">الاسم الكامل</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="clientPosition" class="form-control" required>
+                                <label for="clientPosition">الوظيفة/المنصب</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="clientTestimonial" class="form-control" rows="5" required></textarea>
+                            <label for="clientTestimonial">رأيك وتقييمك</label>
+                        </div>
+
+                        <!-- نظام التقييم بالنجوم -->
+                        <div class="rating-section">
+                            <label>تقييمك:</label>
+                            <div class="stars-rating">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <input type="hidden" id="clientRating" value="5">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            إضافة الرأي
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- إحصائيات الآراء -->
+            <div class="testimonials-stats" data-aos="fade-up">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number" data-count="50">0</h3>
+                            <p>عميل راضٍ</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number" data-count="4.9">0</h3>
+                            <p>متوسط التقييم</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number" data-count="127">0</h3>
+                            <p>رأي مضافة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-number" data-count="95">0</h3>
+                            <p>% عملاء عائدون</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">المدونة</h2>
+                <p data-aos="fade-up" data-aos-delay="200">أحدث المقالات والتحديثات</p>
+            </div>
+            <div class="blog-grid">
+                <!-- سيتم ملء المقالات ديناميكياً عبر JavaScript -->
+            </div>
+            <div class="blog-more" data-aos="fade-up">
+                <a href="#" class="btn btn-outline">عرض جميع المقالات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section class="store" id="store">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">متجر القوالب والخدمات</h2>
+                <p data-aos="fade-up" data-aos-delay="200">قوالب جاهزة وخدمات رقمية</p>
+            </div>
+            
+            <div class="store-filters" data-aos="fade-up">
+                <button class="filter-btn active" data-category="all">الكل</button>
+                <button class="filter-btn" data-category="templates">قوالب مواقع</button>
+                <button class="filter-btn" data-category="plugins">إضافات</button>
+                <button class="filter-btn" data-category="services">خدمات</button>
+            </div>
+            
+            <div class="store-grid">
+                <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="assets/img/R.jfif" alt="قالب موقع شركة" loading="lazy">
+                        <span class="product-badge">الأكثر مبيعاً</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>قالب موقع شركة احترافي</h3>
+                        <p>قالب متكامل لمواقع الشركات مع تصميم عصري ومتجاوب</p>
+                        <div class="product-features">
+                            <span><i class="fas fa-check"></i> متجاوب</span>
+                            <span><i class="fas fa-check"></i> سريع</span>
+                            <span><i class="fas fa-check"></i> SEO محسن</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$99</span>
+                            <span class="old-price">$149</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">شراء الآن</button>
+                            <button class="btn btn-outline">معاينة</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-image">
+                        <img src="assets/img/ic_launcher.png" alt="قالب متجر إلكتروني" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3>قالب متجر إلكتروني</h3>
+                        <p>قالب متجر إلكتروني متكامل مع نظام دفع وتوصيل</p>
+                        <div class="product-features">
+                            <span><i class="fas fa-check"></i> نظام دفع</span>
+                            <span><i class="fas fa-check"></i> لوحة تحكم</span>
+                            <span><i class="fas fa-check"></i> متعدد البائعين</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$199</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">شراء الآن</button>
+                            <button class="btn btn-outline">معاينة</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- يمكن إضافة المزيد من المنتجات -->
+            </div>
+            
+            <div class="payment-methods" data-aos="fade-up">
+                <h4>طرق الدفع المتاحة:</h4>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">حجز موعد استشارة</h2>
+                <p data-aos="fade-up" data-aos-delay="200">اختر الوقت المناسب لمناقشة مشروعك</p>
+            </div>
+            
+            <div class="booking-widget">
+                <div class="calendar-container" data-aos="fade-right">
+                    <div id="bookingCalendar"></div>
+                </div>
+                <div class="booking-form" data-aos="fade-left">
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label>نوع الاستشارة:</label>
+                            <select id="consultationType" required>
+                                <option value="">اختر نوع الاستشارة</option>
+                                <option value="website">تطوير موقع ويب</option>
+                                <option value="consultation">استشارة تقنية</option>
+                                <option value="maintenance">صيانة موقع</option>
+                                <option value="seo">تحسين محركات البحث</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>المدة:</label>
+                            <select id="duration" required>
+                                <option value="30">30 دقيقة</option>
+                                <option value="60">60 دقيقة</option>
+                            </select>
+                        </div>
+                        <div class="time-slots">
+                            <h4>الأوقات المتاحة:</h4>
+                            <div class="slots-grid">
+                                <button type="button" class="time-slot">09:00 ص</button>
+                                <button type="button" class="time-slot">10:00 ص</button>
+                                <button type="button" class="time-slot">11:00 ص</button>
+                                <button type="button" class="time-slot">02:00 م</button>
+                                <button type="button" class="time-slot">03:00 م</button>
+                                <button type="button" class="time-slot">04:00 م</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">تأكيد الحجز</button>
+                    </form>
+                    <div class="booking-summary" id="bookingSummary" aria-hidden="true">
+                        <h4>ملخص الحجز</h4>
+                        <p id="bsType">الاستشارة: -</p>
+                        <p id="bsDuration">المدة: -</p>
+                        <p id="bsSlot">الوقت: -</p>
+                        <p id="bsWhen">تم الاختيار: -</p>
+                        <button id="bookingConfirmBtn" class="btn btn-primary booking-confirm">تأكيد نهائي</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">اتصل بي</h2>
+                <p data-aos="fade-up" data-aos-delay="200">لا تتردد في التواصل معي لأي استفسار</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>لنتحدث عن مشروعك</h3>
+                    <p>أنا دائماً متحمس للعمل على مشاريع جديدة ومبتكرة. دعنا نناقش كيف يمكنني مساعدتك في تحقيق أهدافك.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>موقعي</h4>
+                                <p>تعز، اليمن</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>بريدي الإلكتروني</h4>
+                                <p>mohandesibrahim795.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>هاتفي</h4>
+                                <p>+967 736 994 073</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" class="form-control" required>
+                            <label for="name">الاسم الكامل</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" class="form-control" required>
+                            <label for="email">البريد الإلكتروني</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" class="form-control" required>
+                            <label for="subject">الموضوع</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" class="form-control" required></textarea>
+                            <label for="message">الرسالة</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo" data-aos="fade-up">
+                    <a href="#" class="logo">ابراهيم.<span>المخلافي</span></a>
+                    <p>مطور ويب محترف متخصص في إنشاء حلول رقمية مبتكرة.</p>
+                </div>
+                <div class="footer-links" data-aos="fade-up" data-aos-delay="100">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">عنّي</a></li>
+                        <li><a href="#services">خدماتي</a></li>
+                        <li><a href="#projects">المشاريع</a></li>
+                        <li><a href="#contact">اتصل بي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services" data-aos="fade-up" data-aos-delay="200">
+                    <h4>خدماتي</h4>
+                    <ul>
+                        <li><a href="#">تطوير الويب</a></li>
+                        <li><a href="#">تصميم الواجهات</a></li>
+                        <li><a href="#">تطبيقات الجوال</a></li>
+                        <li><a href="#">تحسين محركات البحث</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter" data-aos="fade-up" data-aos-delay="300">
+                    <h4>النشرة البريدية</h4>
+                    <p>اشترك في نشرتي البريدية لتصلك آخر التحديثات والمقالات.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ابراهيم المخلافي. جميع الحقوق محفوظة.</p>
+                <div class="footer-security">
+                    <span><i class="fas fa-lock"></i> موقع آمن</span>
+                    <span><i class="fas fa-shield-alt"></i> محمي</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+<!-- زر الدردشة العائم -->
+<div class="floating-chat-btn" id="floatingChatBtn">
+    <i class="fas fa-comments"></i>
+    <span class="chat-notification" id="chatNotification"></span>
+</div>
+
+<script>
+// إضافة زر الدردشة العائم
+document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء زر الدردشة العائم
+    const chatBtn = document.createElement('div');
+    chatBtn.id = 'floatingChatBtn';
+    chatBtn.className = 'floating-chat-btn';
+    chatBtn.innerHTML = `
+        <i class="fas fa-comments"></i>
+        <span class="chat-notification" id="chatNotification"></span>
+    `;
+    
+    // إضافة الأنماط الأساسية
+    const style = document.createElement('style');
+    style.textContent = `
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6C63FF, #4A43D8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .floating-chat-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(108, 99, 255, 0.4);
+        }
+        
+        .chat-notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(108, 99, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
+        }
+        
+        .chat-iframe-container {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 9998;
+            display: none;
+            overflow: hidden;
+            border: 2px solid #6C63FF;
+        }
+        
+        .chat-iframe-container.active {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 13px;
+        }
+        
+        .chat-close-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #FF4757;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .floating-chat-btn {
+                bottom: 15px;
+                left: 15px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+            
+            .chat-iframe-container {
+                width: 300px;
+                height: 450px;
+                left: 15px;
+                bottom: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chat-iframe-container {
+                width: calc(100vw - 30px);
+                left: 15px;
+                right: 15px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(chatBtn);
+
+    // إنشاء حاوية الدردشة
+    const chatContainer = document.createElement('div');
+    chatContainer.id = 'chatContainer';
+    chatContainer.className = 'chat-iframe-container';
+    chatContainer.innerHTML = `
+        <button class="chat-close-btn" id="chatCloseBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <iframe src="chat/chat-systym.html" id="chatIframe"></iframe>
+    `;
+    document.body.appendChild(chatContainer);
+
+    // التحكم في فتح وإغلاق الدردشة
+    const floatingChatBtn = document.getElementById('floatingChatBtn');
+    const chatCloseBtn = document.getElementById('chatCloseBtn');
+    const chatIframe = document.getElementById('chatIframe');
+
+    floatingChatBtn.addEventListener('click', function() {
+        chatContainer.classList.toggle('active');
+        floatingChatBtn.style.transform = 'scale(1)';
+        floatingChatBtn.style.animation = 'none';
+        
+        // إعادة تحميل الدردشة عند الفتح لضمان التحديث
+        setTimeout(() => {
+            chatIframe.src = chatIframe.src;
+        }, 100);
+    });
+
+    chatCloseBtn.addEventListener('click', function() {
+        chatContainer.classList.remove('active');
+        floatingChatBtn.style.animation = 'pulse 2s infinite';
+    });
+
+    // إغلاق الدردشة عند النقر خارجها
+    document.addEventListener('click', function(event) {
+        if (!chatContainer.contains(event.target) && 
+            !floatingChatBtn.contains(event.target) && 
+            chatContainer.classList.contains('active')) {
+            chatContainer.classList.remove('active');
+            floatingChatBtn.style.animation = 'pulse 2s infinite';
+        }
+    });
+
+    // منع إغلاق الدردشة عند النقر داخلها
+    chatContainer.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+
+    // الاستماع للرسائل من الدردشة للإشعارات
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'NEW_MESSAGE') {
+            showChatNotification();
+        }
+    });
+
+    // وظيفة عرض إشعار الدردشة
+    function showChatNotification() {
+        const notification = document.getElementById('chatNotification');
+        notification.style.display = 'flex';
+        notification.textContent = '!';
+        
+        // اهتزاز زر الدردشة
+        floatingChatBtn.style.animation = 'none';
+        setTimeout(() => {
+            floatingChatBtn.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                floatingChatBtn.style.transform = 'scale(1)';
+            }, 100);
+        }, 50);
+    }
+
+    // إخفاء الإشعار عند فتح الدردشة
+    floatingChatBtn.addEventListener('click', function() {
+        const notification = document.getElementById('chatNotification');
+        notification.style.display = 'none';
+    });
+
+    console.log('✅ تم تحميل زر الدردشة العائم بنجاح');
+});
+</script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Firebase SDK (compat) -->
+    <script>
+    
+        window.FIREBASE_CONFIG = window.FIREBASE_CONFIG || {
+            apiKey: "AIzaSyBLb37cvBACSkHIzDIU7ggEcEojF5zsxKI",
+            authDomain: "ibrahimmessegs.firebaseapp.com",
+            projectId: "ibrahimmessegs",
+            storageBucket: "ibrahimmessegs.firebasestorage.app",
+            messagingSenderId: "426012859754",
+            appId: "1:426012859754:web:513833a86a072c0cfd5913",
+            measurementId: "G-RRKFS3KJTD"
+        };
+
+        // Allow anonymous (no-registration) chat by default on this site.
+        // Set to true if you want to require users to log in before opening chat.
+        window.REQUIRE_REGISTRATION_FOR_CHAT = false;
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+    <!-- Crypto utilities (used by chat-security when available) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+ 
+    <!-- نظام المصادقة والواجهات -->
+   
+
+    <!-- الملفات الرئيسية -->
+    <script src="js/script.js"></script>
+
+    <!-- التهيئة -->
+    <script>
+        // تهيئة AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // إخفاء شاشة التحميل
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.querySelector('.loader').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // تفعيل إشعارات الدردشة
+        document.addEventListener('DOMContentLoaded', function() {
+            if ('Notification' in window) {
+                Notification.requestPermission();
+            }
+        });
+    </script>
+
+<script>
+// التهيئة بعد تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    // تهيئة نظام المصادقة
+    window.authSystem = new AuthSystem();
+    
+    // تفعيل زر لوحة الإدارة إذا كان المستخدم مصادقاً
+    const adminToggle = document.getElementById('adminToggle');
+    if (adminToggle) {
+        adminToggle.addEventListener('click', function() {
+            if (window.authSystem.checkAuth()) {
+                if (window.chatAdmin) {
+                    window.chatAdmin.toggleAdminPanel();
+                }
+            } else {
+                window.authSystem.showAuthModal();
+            }
+        });
+    }
+
+    // *** نحافظ على زر لوحة الإدارة ***
+    if (!document.getElementById('adminToggle')) {
+        const adminBtn = document.createElement('button');
+        adminBtn.id = 'adminToggle';
+        adminBtn.className = 'admin-toggle-btn';
+        adminBtn.innerHTML = '<i class="fas fa-cog"></i>';
+        adminBtn.title = 'لوحة إدارة الدردشة';
+        adminBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9998;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6C63FF, #4A43D8);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+            transition: all 0.3s ease;
+        `;
+        
+        adminBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.boxShadow = '0 6px 20px rgba(108, 99, 255, 0.4)';
+        });
+        
+        adminBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '0 4px 15px rgba(108, 99, 255, 0.3)';
+        });
+
+        document.body.appendChild(adminBtn);
+    }
+
+    // *** ملاحظة مهمة ***
+    // تم حذف زر الدردشة بالكامل
+    // لا يوجد أي كود يُنشئ زر الدردشة حالياً
+});
+</script>
+
+
+
+
+<!-- Lightweight cart & booking helpers (safe, no-op if elements missing) -->
+<script>
+(function(){
+    'use strict';
+    // Toast helper
+    function showToast(msg, type='info', timeout=3000){
+        try{
+            const t = document.createElement('div');
+            t.className = `site-toast ${type}`;
+            t.textContent = msg;
+            Object.assign(t.style, {
+                position: 'fixed', right: '20px', bottom: '20px', zIndex: 11000,
+                background: type==='error'?'#F56565': type==='success'?'#48BB78':'#333',
+                color: '#fff', padding: '10px 14px', borderRadius: '8px', boxShadow: '0 8px 20px rgba(0,0,0,0.12)'
+            });
+            document.body.appendChild(t);
+            setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(),300); }, timeout);
+        }catch(e){/* silent */}
+    }
+
+    // Simple cart stored in localStorage
+    const CART_KEY = 'site_cart_v1';
+    function loadCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; } }
+    function saveCart(cart){ try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e){} }
+    function getTotal(cart){ return cart.reduce((s,i)=> s + (Number(i.price||0) * (i.qty||1)),0); }
+
+    function renderCart(){
+        let drawer = document.getElementById('cartDrawer');
+        const cart = loadCart();
+        if (!drawer){
+            drawer = document.createElement('div'); drawer.id='cartDrawer'; drawer.className='cart-drawer';
+            document.body.appendChild(drawer);
+        }
+        drawer.innerHTML = '';
+        const title = document.createElement('h4'); title.textContent = 'سلة التسوق'; title.style.margin='0 0 8px 0'; drawer.appendChild(title);
+        if (cart.length===0){ const p = document.createElement('p'); p.textContent='السلة فارغة'; drawer.appendChild(p); return; }
+        const list = document.createElement('div'); cart.forEach((it, idx)=>{
+            const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.alignItems='center'; row.style.margin='6px 0';
+            const left = document.createElement('div'); left.innerHTML = `<strong>${it.title}</strong><div style="font-size:0.9rem;color:#666">${it.qty} × ${it.price}</div>`;
+            const remove = document.createElement('button'); remove.className='cart-remove-btn'; remove.dataset.idx=idx; remove.textContent='×'; Object.assign(remove.style,{background:'none',border:'none',fontSize:'18px',cursor:'pointer'});
+            row.appendChild(left); row.appendChild(remove); list.appendChild(row);
+        }); drawer.appendChild(list);
+        const total = document.createElement('div'); total.style.marginTop='10px'; total.innerHTML = `<strong>المجموع: $${getTotal(cart).toFixed(2)}</strong>`; drawer.appendChild(total);
+        const clearBtn = document.createElement('button'); clearBtn.id='cartClearBtn'; clearBtn.className='btn btn-outline'; clearBtn.textContent='تفريغ السلة'; Object.assign(clearBtn.style,{marginTop:'8px'});
+        drawer.appendChild(clearBtn);
+    }
+
+    function addToCart(item){ const cart=loadCart(); const exists = cart.find(i=>i.title===item.title && i.price==item.price); if (exists){ exists.qty = (exists.qty||1) + (item.qty||1); } else cart.push(item); saveCart(cart); renderCart(); showToast('أضيف إلى السلة', 'success'); }
+    function removeFromCart(idx){ const cart=loadCart(); if (idx>=0 && idx<cart.length) cart.splice(idx,1); saveCart(cart); renderCart(); showToast('تمت الإزالة', 'info'); }
+
+    // Booking handler (local fallback)
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm){
+        bookingForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            try{
+                const type = document.getElementById('consultationType')?.value || '';
+                const duration = document.getElementById('duration')?.value || '';
+                const selectedSlot = bookingForm.querySelector('.time-slot.selected')?.textContent || bookingForm.querySelector('.time-slot')?.textContent || '';
+                const payload = { type, duration, slot: selectedSlot, createdAt: new Date().toISOString() };
+                localStorage.setItem('last_booking', JSON.stringify(payload));
+                showToast('تم تأكيد الحجز (محلياً)', 'success');
+                // optionally notify backend via fetch if FIREBASE_CONFIG is present
+                if (window.FIREBASE_CONFIG && window.firebase) {
+                    try{ /* developer may wire this to Firestore bookings collection */ }
+                    catch(e){}
+                }
+            }catch(err){ showToast('فشل الحجز', 'error'); }
+        });
+        // time slot selection
+        bookingForm.addEventListener('click', function(e){ const btn = e.target.closest && e.target.closest('.time-slot'); if (btn){ bookingForm.querySelectorAll('.time-slot').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); } });
+    }
+
+    // Global delegated clicks for add-to-cart and cart actions
+    document.body.addEventListener('click', function(e){
+        const addBtn = e.target.closest && e.target.closest('.product-actions .btn, .product-card .btn.btn-primary');
+        if (addBtn){
+            const card = addBtn.closest && addBtn.closest('.product-card');
+            if (!card) return;
+            const title = card.querySelector('h3')?.textContent.trim() || 'منتج';
+            const priceText = card.querySelector('.price')?.textContent || card.querySelector('.product-price .price')?.textContent || '$0';
+            const price = parseFloat((priceText+'').replace(/[^0-9.]/g,'')) || 0;
+            addToCart({ title, price, qty: 1 });
+            return;
+        }
+        const cartBtn = e.target.closest && e.target.closest('#cartHeaderBtn');
+        if (cartBtn){ renderCart(); const d = document.getElementById('cartDrawer'); if (d) d.classList.toggle('open'); return; }
+        const removeBtn = e.target.closest && e.target.closest('.cart-remove-btn');
+        if (removeBtn){ removeFromCart(parseInt(removeBtn.dataset.idx,10)); return; }
+    }, false);
+
+    // Cart button is located in the header as #cartHeaderBtn (icon-only). No floating button created.
+
+    // Init on load
+    try{ renderCart(); }catch(e){}
+})();
+</script>
+
+<!-- Testimonials carousel & booking summary behavior -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    // Testimonials carousel
+    const container = document.querySelector('.testimonials-container');
+    const dotsWrap = document.querySelector('.testimonial-dots');
+    const prevBtn = document.querySelector('.testimonial-prev');
+    const nextBtn = document.querySelector('.testimonial-next');
+    if (container){
+        let index = 0;
+        const cards = Array.from(container.children);
+        function show(i){
+            index = (i + cards.length) % cards.length;
+            const offset = -index * 100;
+            container.style.transform = `translateX(${offset}%)`;
+            if (dotsWrap){
+                dotsWrap.querySelectorAll('.testimonial-dot').forEach((d,di)=> d.classList.toggle('active', di===index));
+            }
+        }
+        // build dots if missing
+        if (dotsWrap && dotsWrap.children.length === 0){
+            cards.forEach((c, i)=>{ const d = document.createElement('button'); d.className='testimonial-dot'; d.addEventListener('click', ()=> show(i)); dotsWrap.appendChild(d); });
+        }
+        prevBtn?.addEventListener('click', ()=> show(index-1));
+        nextBtn?.addEventListener('click', ()=> show(index+1));
+        show(0);
+        let autoplay = setInterval(()=> show(index+1), 6000);
+        container.addEventListener('mouseenter', ()=> clearInterval(autoplay));
+        container.addEventListener('mouseleave', ()=> { autoplay = setInterval(()=> show(index+1), 6000); });
+    }
+
+    // Booking summary behavior
+    const bookingForm = document.getElementById('bookingForm');
+    function updateBookingSummary(){
+        const bs = document.getElementById('bookingSummary');
+        if (!bs) return;
+        const type = document.getElementById('consultationType')?.value || '-';
+        const duration = document.getElementById('duration')?.value || '-';
+        const slot = bookingForm?.querySelector('.time-slot.selected')?.textContent || '-';
+        const now = new Date();
+        const when = now.toLocaleString();
+        document.getElementById('bsType').textContent = 'الاستشارة: ' + (type || '-');
+        document.getElementById('bsDuration').textContent = 'المدة: ' + (duration ? duration + ' دقيقة' : '-');
+        document.getElementById('bsSlot').textContent = 'الوقت: ' + (slot || '-');
+        document.getElementById('bsWhen').textContent = 'تم الاختيار: ' + when;
+        bs.setAttribute('aria-hidden','false');
+    }
+    if (bookingForm){
+        bookingForm.addEventListener('click', function(e){ const btn = e.target.closest && e.target.closest('.time-slot'); if (btn){ bookingForm.querySelectorAll('.time-slot').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); updateBookingSummary(); } });
+        bookingForm.addEventListener('submit', function(e){ updateBookingSummary(); });
+    }
+    document.getElementById('bookingConfirmBtn')?.addEventListener('click', function(){
+        const payload = { type: document.getElementById('consultationType')?.value || '', duration: document.getElementById('duration')?.value || '', slot: bookingForm?.querySelector('.time-slot.selected')?.textContent || '' };
+        localStorage.setItem('last_booking_confirmed', JSON.stringify(payload));
+        try{ showToast('تم تأكيد الحجز نهائياً', 'success', 3500); }catch(e){}
+    });
+    document.getElementById('consultationType')?.addEventListener('change', updateBookingSummary);
+    document.getElementById('duration')?.addEventListener('change', updateBookingSummary);
+    updateBookingSummary();
+});
+</script>
+
+</body>
+</html>

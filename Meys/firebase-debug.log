@@ -1,0 +1,737 @@
+[debug] [2025-11-28T06:38:03.685Z] ----------------------------------------------------------------------
+[debug] [2025-11-28T06:38:03.687Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2025-11-28T06:38:03.688Z] CLI Version:   14.25.0
+[debug] [2025-11-28T06:38:03.688Z] Platform:      win32
+[debug] [2025-11-28T06:38:03.688Z] Node Version:  v24.11.1
+[debug] [2025-11-28T06:38:03.688Z] Time:          Fri Nov 28 2025 09:38:03 GMT+0300 (Arabian Standard Time)
+[debug] [2025-11-28T06:38:03.688Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-28T06:38:03.851Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-28T06:38:03.852Z] > authorizing via signed-in user (mohandesibrahim759@gmail.com)
+[debug] [2025-11-28T06:38:03.852Z] [iam] checking project ibrahimmessegs for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-11-28T06:38:03.853Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:03.853Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:03.854Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions [none]
+[debug] [2025-11-28T06:38:03.855Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions x-goog-quota-user=projects/ibrahimmessegs
+[debug] [2025-11-28T06:38:03.855Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:38:04.944Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions 200
+[debug] [2025-11-28T06:38:04.944Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:38:04.946Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:04.948Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:04.949Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs [none]
+[debug] [2025-11-28T06:38:05.552Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs 200
+[debug] [2025-11-28T06:38:05.553Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs {"projectId":"ibrahimmessegs","projectNumber":"426012859754","displayName":"ibrahimmessegs","name":"projects/ibrahimmessegs","resources":{"hostingSite":"ibrahimmessegs"},"state":"ACTIVE","etag":"1_47e88947-4612-437b-9b58-51722acffcd2"}
+[info] 
+[info] === Deploying to 'ibrahimmessegs'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-11-28T06:38:05.572Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:05.573Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:05.575Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions [none]
+[debug] [2025-11-28T06:38:05.576Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-11-28T06:38:07.230Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions 200
+[debug] [2025-11-28T06:38:07.231Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"name":"projects/426012859754/sites/ibrahimmessegs/versions/efb567eed338a0dd","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[ibrahimmessegs]: beginning deploy... 
+[info] i  hosting[ibrahimmessegs]: found 14 files in . 
+[debug] [2025-11-28T06:38:07.255Z] [hosting] uploading with 200 concurrency
+[debug] [2025-11-28T06:38:07.258Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.258Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.259Z] [hosting] hash cache [] stored for 14 files
+[debug] [2025-11-28T06:38:07.260Z] [hosting][hash queue][FINAL] {"max":2,"min":0,"avg":0,"active":0,"complete":14,"success":14,"errored":0,"retried":0,"total":14,"elapsed":4}
+[debug] [2025-11-28T06:38:07.260Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/efb567eed338a0dd:populateFiles [none]
+[debug] [2025-11-28T06:38:07.261Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/efb567eed338a0dd:populateFiles {"files":{"/README.md":"e33a6af78397fe156ee21d9f213043d35c2792ea04a49089ee17fa27f11a9c51","/index.html":"58c05fc2d3436b8aaab8dcc1d78e0eab8f391ba442c5e2cef8564f7f4ac65a97","/style/style.css":"5b79e340a2efbd9ffd6fbf8f4772f59c71a3be741f19377fa820d108b822de6e","/js/script.js":"371627c8727b522713cdc2df8171bee716ec2119176cd57c8115787003b87bc2","/chat/chat-systym.html":"90a4c6d158790fc85b157d08cc195c2d97d5c9cce85e909548c3faf1ed7b9c1a","/chat/chat-style.css":"a571ded06e0e3d5db69f45ab2cde5ec4094967cd0a640d9c41a448a226940f22","/chat/chat-script.js":"ec04cbec4fdab2e7cc3e0f6d8ae3161abb255845ae80621d0d2abf293db5ca30","/chat/calls.js":"7741d1232214136fec2e14fcfac565e98a8c3b2d77d452fc1cdec70345146c11","/assets/img/R.jfif":"a8e377b085beb34bdf1f2375df36aea0c4da0d8be060fe9abd9ee2459ebcd909","/assets/img/mmm.png":"8093715949bdad1e551d8114ab22224cab7940a7bfdc1956c201d0cae1125e8d","/assets/img/ic_launcher.png":"9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","/assets/img/ibrahim.png":"31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","/assets/img/1.jpg":"a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db","/assets/ico/favicon.ico":"ae18aad3abe9417669c2a0516c9e606f4bcb3707cf372f195faf5778ee5e3985"}}
+[debug] [2025-11-28T06:38:07.629Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/efb567eed338a0dd:populateFiles 200
+[debug] [2025-11-28T06:38:07.630Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/efb567eed338a0dd:populateFiles {"uploadRequiredHashes":["9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files"}
+[debug] [2025-11-28T06:38:07.636Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.637Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.639Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.640Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.642Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.643Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:07.644Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:38:07.646Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[debug] [2025-11-28T06:38:07.648Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:38:07.648Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[debug] [2025-11-28T06:38:07.649Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [none]
+[debug] [2025-11-28T06:38:07.649Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [stream]
+[debug] [2025-11-28T06:38:07.651Z] [hosting][populate queue][FINAL] {"max":386,"min":386,"avg":386,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":393}
+[debug] [2025-11-28T06:38:07.651Z] [hosting] uploads queued: 3
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:38:38.121Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:38:38.122Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:38.124Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:38:38.125Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:38:38.127Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:39:00.137Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T06:39:00.139Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:00.140Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:00.145Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:39:00.149Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:39:08.989Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:39:08.990Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:08.990Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:08.990Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:39:08.991Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:39:40.668Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:39:40.669Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:40.673Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:40.675Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:39:40.678Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:39:53.033Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T06:39:53.034Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:53.035Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:39:53.035Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:39:53.038Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:40:13.949Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:40:13.951Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:40:13.954Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:40:13.957Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:40:13.958Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:40:46.729Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T06:40:46.730Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:40:46.731Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:40:46.734Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:40:46.735Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:40:50.420Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:40:50.421Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:40:50.422Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:40:50.425Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:40:50.426Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/efb567eed338a0dd/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] Task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b failed: retries exhausted after 6 attempts, with error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'TLSSocket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+[debug] [2025-11-28T06:41:20.491Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":2,"complete":1,"success":0,"errored":1,"retried":8,"total":3,"elapsed":192857}
+[info] i  hosting: uploading new files [1/3] (33%) 
+[debug] [2025-11-28T06:41:20.529Z] FirebaseError: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'TLSSocket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+    at RetryOperation._fn (C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:306:88)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[error] 
+[error] Error: Task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b failed: retries exhausted after 6 attempts, with error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'TLSSocket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+[debug] [2025-11-28T06:41:42.668Z] ----------------------------------------------------------------------
+[debug] [2025-11-28T06:41:42.670Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2025-11-28T06:41:42.671Z] CLI Version:   14.25.0
+[debug] [2025-11-28T06:41:42.671Z] Platform:      win32
+[debug] [2025-11-28T06:41:42.671Z] Node Version:  v24.11.1
+[debug] [2025-11-28T06:41:42.671Z] Time:          Fri Nov 28 2025 09:41:42 GMT+0300 (Arabian Standard Time)
+[debug] [2025-11-28T06:41:42.671Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-28T06:41:42.673Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-11-28T06:41:42.857Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-28T06:41:42.858Z] > authorizing via signed-in user (mohandesibrahim759@gmail.com)
+[debug] [2025-11-28T06:41:42.858Z] [iam] checking project ibrahimmessegs for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-11-28T06:41:42.859Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:42.859Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:42.859Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions [none]
+[debug] [2025-11-28T06:41:42.860Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions x-goog-quota-user=projects/ibrahimmessegs
+[debug] [2025-11-28T06:41:42.860Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:41:43.468Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-11-28T06:41:43.468Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-11-28T06:41:44.083Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions 200
+[debug] [2025-11-28T06:41:44.084Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:41:44.086Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:44.086Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:44.089Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs [none]
+[debug] [2025-11-28T06:41:44.762Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs 200
+[debug] [2025-11-28T06:41:44.763Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs {"projectId":"ibrahimmessegs","projectNumber":"426012859754","displayName":"ibrahimmessegs","name":"projects/ibrahimmessegs","resources":{"hostingSite":"ibrahimmessegs"},"state":"ACTIVE","etag":"1_47e88947-4612-437b-9b58-51722acffcd2"}
+[info] 
+[info] === Deploying to 'ibrahimmessegs'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-11-28T06:41:44.792Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:44.793Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:44.797Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions [none]
+[debug] [2025-11-28T06:41:44.799Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-11-28T06:41:46.488Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions 200
+[debug] [2025-11-28T06:41:46.488Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"name":"projects/426012859754/sites/ibrahimmessegs/versions/457d41c14dd98cc7","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[ibrahimmessegs]: beginning deploy... 
+[info] i  hosting[ibrahimmessegs]: found 13 files in . 
+[debug] [2025-11-28T06:41:46.508Z] [hosting] uploading with 200 concurrency
+[debug] [2025-11-28T06:41:46.513Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.514Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.515Z] [hosting] hash cache [] stored for 13 files
+[debug] [2025-11-28T06:41:46.515Z] [hosting][hash queue][FINAL] {"max":2,"min":0,"avg":0,"active":0,"complete":13,"success":13,"errored":0,"retried":0,"total":13,"elapsed":4}
+[debug] [2025-11-28T06:41:46.516Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/457d41c14dd98cc7:populateFiles [none]
+[debug] [2025-11-28T06:41:46.516Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/457d41c14dd98cc7:populateFiles {"files":{"/index.html":"58c05fc2d3436b8aaab8dcc1d78e0eab8f391ba442c5e2cef8564f7f4ac65a97","/style/style.css":"5b79e340a2efbd9ffd6fbf8f4772f59c71a3be741f19377fa820d108b822de6e","/js/script.js":"371627c8727b522713cdc2df8171bee716ec2119176cd57c8115787003b87bc2","/chat/chat-systym.html":"90a4c6d158790fc85b157d08cc195c2d97d5c9cce85e909548c3faf1ed7b9c1a","/chat/chat-style.css":"a571ded06e0e3d5db69f45ab2cde5ec4094967cd0a640d9c41a448a226940f22","/chat/chat-script.js":"ec04cbec4fdab2e7cc3e0f6d8ae3161abb255845ae80621d0d2abf293db5ca30","/chat/calls.js":"7741d1232214136fec2e14fcfac565e98a8c3b2d77d452fc1cdec70345146c11","/assets/img/R.jfif":"a8e377b085beb34bdf1f2375df36aea0c4da0d8be060fe9abd9ee2459ebcd909","/assets/img/mmm.png":"8093715949bdad1e551d8114ab22224cab7940a7bfdc1956c201d0cae1125e8d","/assets/img/ic_launcher.png":"9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","/assets/img/ibrahim.png":"31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","/assets/img/1.jpg":"a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db","/assets/ico/favicon.ico":"ae18aad3abe9417669c2a0516c9e606f4bcb3707cf372f195faf5778ee5e3985"}}
+[debug] [2025-11-28T06:41:46.884Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/457d41c14dd98cc7:populateFiles 200
+[debug] [2025-11-28T06:41:46.885Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/457d41c14dd98cc7:populateFiles {"uploadRequiredHashes":["9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files"}
+[debug] [2025-11-28T06:41:46.892Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.892Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.893Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.894Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.894Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.895Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:41:46.895Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:41:46.896Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[debug] [2025-11-28T06:41:46.897Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:41:46.898Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[debug] [2025-11-28T06:41:46.899Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [none]
+[debug] [2025-11-28T06:41:46.899Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/457d41c14dd98cc7/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [stream]
+[debug] [2025-11-28T06:41:46.900Z] [hosting][populate queue][FINAL] {"max":382,"min":382,"avg":382,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":387}
+[debug] [2025-11-28T06:41:46.900Z] [hosting] uploads queued: 3
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:42:26.790Z] ----------------------------------------------------------------------
+[debug] [2025-11-28T06:42:26.792Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2025-11-28T06:42:26.792Z] CLI Version:   14.25.0
+[debug] [2025-11-28T06:42:26.793Z] Platform:      win32
+[debug] [2025-11-28T06:42:26.793Z] Node Version:  v24.11.1
+[debug] [2025-11-28T06:42:26.793Z] Time:          Fri Nov 28 2025 09:42:26 GMT+0300 (Arabian Standard Time)
+[debug] [2025-11-28T06:42:26.793Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-28T06:42:26.955Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-28T06:42:26.957Z] > authorizing via signed-in user (mohandesibrahim759@gmail.com)
+[debug] [2025-11-28T06:42:26.957Z] [iam] checking project ibrahimmessegs for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-11-28T06:42:26.958Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:26.958Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:26.959Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions [none]
+[debug] [2025-11-28T06:42:26.960Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions x-goog-quota-user=projects/ibrahimmessegs
+[debug] [2025-11-28T06:42:26.960Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:42:28.054Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions 200
+[debug] [2025-11-28T06:42:28.054Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:42:28.055Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:28.055Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:28.056Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs [none]
+[debug] [2025-11-28T06:42:28.750Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs 200
+[debug] [2025-11-28T06:42:28.751Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs {"projectId":"ibrahimmessegs","projectNumber":"426012859754","displayName":"ibrahimmessegs","name":"projects/ibrahimmessegs","resources":{"hostingSite":"ibrahimmessegs"},"state":"ACTIVE","etag":"1_47e88947-4612-437b-9b58-51722acffcd2"}
+[info] 
+[info] === Deploying to 'ibrahimmessegs'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-11-28T06:42:28.761Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:28.762Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:28.762Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions [none]
+[debug] [2025-11-28T06:42:28.763Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-11-28T06:42:30.334Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions 200
+[debug] [2025-11-28T06:42:30.335Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"name":"projects/426012859754/sites/ibrahimmessegs/versions/0b9242c794eff716","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[ibrahimmessegs]: beginning deploy... 
+[info] i  hosting[ibrahimmessegs]: found 13 files in . 
+[debug] [2025-11-28T06:42:30.353Z] [hosting] uploading with 200 concurrency
+[debug] [2025-11-28T06:42:30.356Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.356Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.358Z] [hosting] hash cache [] stored for 13 files
+[debug] [2025-11-28T06:42:30.358Z] [hosting][hash queue][FINAL] {"max":2,"min":0,"avg":0,"active":0,"complete":13,"success":13,"errored":0,"retried":0,"total":13,"elapsed":4}
+[debug] [2025-11-28T06:42:30.359Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/0b9242c794eff716:populateFiles [none]
+[debug] [2025-11-28T06:42:30.359Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/0b9242c794eff716:populateFiles {"files":{"/index.html":"58c05fc2d3436b8aaab8dcc1d78e0eab8f391ba442c5e2cef8564f7f4ac65a97","/style/style.css":"5b79e340a2efbd9ffd6fbf8f4772f59c71a3be741f19377fa820d108b822de6e","/js/script.js":"371627c8727b522713cdc2df8171bee716ec2119176cd57c8115787003b87bc2","/chat/chat-systym.html":"90a4c6d158790fc85b157d08cc195c2d97d5c9cce85e909548c3faf1ed7b9c1a","/chat/chat-style.css":"a571ded06e0e3d5db69f45ab2cde5ec4094967cd0a640d9c41a448a226940f22","/chat/chat-script.js":"ec04cbec4fdab2e7cc3e0f6d8ae3161abb255845ae80621d0d2abf293db5ca30","/chat/calls.js":"7741d1232214136fec2e14fcfac565e98a8c3b2d77d452fc1cdec70345146c11","/assets/img/R.jfif":"a8e377b085beb34bdf1f2375df36aea0c4da0d8be060fe9abd9ee2459ebcd909","/assets/img/mmm.png":"8093715949bdad1e551d8114ab22224cab7940a7bfdc1956c201d0cae1125e8d","/assets/img/ic_launcher.png":"9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","/assets/img/ibrahim.png":"31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","/assets/img/1.jpg":"a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db","/assets/ico/favicon.ico":"ae18aad3abe9417669c2a0516c9e606f4bcb3707cf372f195faf5778ee5e3985"}}
+[debug] [2025-11-28T06:42:30.749Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/0b9242c794eff716:populateFiles 200
+[debug] [2025-11-28T06:42:30.750Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/0b9242c794eff716:populateFiles {"uploadRequiredHashes":["a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db","9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files"}
+[debug] [2025-11-28T06:42:30.756Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.757Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.759Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.760Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.762Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.763Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:42:30.765Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [none]
+[debug] [2025-11-28T06:42:30.766Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [stream]
+[debug] [2025-11-28T06:42:30.772Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:42:30.773Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[debug] [2025-11-28T06:42:30.778Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:42:30.783Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[debug] [2025-11-28T06:42:30.788Z] [hosting][populate queue][FINAL] {"max":409,"min":409,"avg":409,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":432}
+[debug] [2025-11-28T06:42:30.789Z] [hosting] uploads queued: 3
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:43:01.240Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:43:01.243Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:43:01.244Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:43:01.245Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:43:01.246Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:43:23.264Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T06:43:23.265Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:43:23.265Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:43:23.266Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:43:23.266Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:43:32.126Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:43:32.127Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:43:32.128Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:43:32.129Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:43:32.131Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:44:03.795Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:44:03.796Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:44:03.796Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:44:03.797Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:44:03.797Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:44:16.177Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T06:44:16.179Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:44:16.182Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:44:16.183Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:44:16.186Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:44:37.061Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:44:37.063Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:44:37.066Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:44:37.070Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:44:37.072Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:45:09.885Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T06:45:09.887Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:45:09.889Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:45:09.893Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:45:09.894Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T06:45:13.538Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T06:45:13.540Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:45:13.543Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:45:13.546Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:45:13.547Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/0b9242c794eff716/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] Task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b failed: retries exhausted after 6 attempts, with error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'TLSSocket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+[debug] [2025-11-28T06:45:43.629Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":2,"complete":1,"success":0,"errored":1,"retried":8,"total":3,"elapsed":192875}
+[info] i  hosting: uploading new files [1/3] (33%) 
+[debug] [2025-11-28T06:45:43.666Z] FirebaseError: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'TLSSocket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+    at RetryOperation._fn (C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:306:88)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[error] 
+[error] Error: Task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b failed: retries exhausted after 6 attempts, with error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'TLSSocket'
+    |     property 'parser' -> object with constructor 'HTTPParser'
+    --- property 'socket' closes the circle
+[debug] [2025-11-28T06:52:48.509Z] ----------------------------------------------------------------------
+[debug] [2025-11-28T06:52:48.511Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2025-11-28T06:52:48.511Z] CLI Version:   14.25.0
+[debug] [2025-11-28T06:52:48.511Z] Platform:      win32
+[debug] [2025-11-28T06:52:48.511Z] Node Version:  v24.11.1
+[debug] [2025-11-28T06:52:48.511Z] Time:          Fri Nov 28 2025 09:52:48 GMT+0300 (Arabian Standard Time)
+[debug] [2025-11-28T06:52:48.512Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-28T06:52:48.673Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-28T06:52:48.675Z] > authorizing via signed-in user (mohandesibrahim759@gmail.com)
+[debug] [2025-11-28T06:52:48.676Z] [iam] checking project ibrahimmessegs for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-11-28T06:52:48.680Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:48.680Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:48.681Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions [none]
+[debug] [2025-11-28T06:52:48.681Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions x-goog-quota-user=projects/ibrahimmessegs
+[debug] [2025-11-28T06:52:48.682Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:52:50.109Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions 200
+[debug] [2025-11-28T06:52:50.110Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T06:52:50.113Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:50.115Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:50.116Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs [none]
+[debug] [2025-11-28T06:52:50.889Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs 200
+[debug] [2025-11-28T06:52:50.890Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs {"projectId":"ibrahimmessegs","projectNumber":"426012859754","displayName":"ibrahimmessegs","name":"projects/ibrahimmessegs","resources":{"hostingSite":"ibrahimmessegs"},"state":"ACTIVE","etag":"1_47e88947-4612-437b-9b58-51722acffcd2"}
+[info] 
+[info] === Deploying to 'ibrahimmessegs'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-11-28T06:52:50.899Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:50.899Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:50.899Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions [none]
+[debug] [2025-11-28T06:52:50.900Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-11-28T06:52:52.649Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions 200
+[debug] [2025-11-28T06:52:52.649Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"name":"projects/426012859754/sites/ibrahimmessegs/versions/3df913a82aefe683","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[ibrahimmessegs]: beginning deploy... 
+[info] i  hosting[ibrahimmessegs]: found 12 files in . 
+[debug] [2025-11-28T06:52:52.666Z] [hosting] uploading with 200 concurrency
+[debug] [2025-11-28T06:52:52.669Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:52.669Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:52.670Z] [hosting] hash cache [] stored for 12 files
+[debug] [2025-11-28T06:52:52.670Z] [hosting][hash queue][FINAL] {"max":1,"min":0,"avg":0,"active":0,"complete":12,"success":12,"errored":0,"retried":0,"total":12,"elapsed":3}
+[debug] [2025-11-28T06:52:52.671Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/3df913a82aefe683:populateFiles [none]
+[debug] [2025-11-28T06:52:52.671Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/3df913a82aefe683:populateFiles {"files":{"/index.html":"58c05fc2d3436b8aaab8dcc1d78e0eab8f391ba442c5e2cef8564f7f4ac65a97","/style/style.css":"5b79e340a2efbd9ffd6fbf8f4772f59c71a3be741f19377fa820d108b822de6e","/js/script.js":"371627c8727b522713cdc2df8171bee716ec2119176cd57c8115787003b87bc2","/chat/chat-systym.html":"90a4c6d158790fc85b157d08cc195c2d97d5c9cce85e909548c3faf1ed7b9c1a","/chat/chat-style.css":"a571ded06e0e3d5db69f45ab2cde5ec4094967cd0a640d9c41a448a226940f22","/chat/chat-script.js":"ec04cbec4fdab2e7cc3e0f6d8ae3161abb255845ae80621d0d2abf293db5ca30","/chat/calls.js":"7741d1232214136fec2e14fcfac565e98a8c3b2d77d452fc1cdec70345146c11","/assets/img/mmm.png":"8093715949bdad1e551d8114ab22224cab7940a7bfdc1956c201d0cae1125e8d","/assets/img/ic_launcher.png":"9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","/assets/img/ibrahim.png":"31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","/assets/img/1.jpg":"a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db","/assets/ico/favicon.ico":"ae18aad3abe9417669c2a0516c9e606f4bcb3707cf372f195faf5778ee5e3985"}}
+[debug] [2025-11-28T06:52:53.059Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/3df913a82aefe683:populateFiles 200
+[debug] [2025-11-28T06:52:53.060Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/3df913a82aefe683:populateFiles {"uploadRequiredHashes":["a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db","9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files"}
+[debug] [2025-11-28T06:52:53.066Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:53.067Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:53.069Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:53.070Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:53.072Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:53.072Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T06:52:53.074Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [none]
+[debug] [2025-11-28T06:52:53.075Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files/a27339fae870504d3945e9d4bd102dc21d051094f7e7f2e37fe5ef5c6b1d54db [stream]
+[debug] [2025-11-28T06:52:53.081Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T06:52:53.085Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[debug] [2025-11-28T06:52:53.089Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T06:52:53.090Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/3df913a82aefe683/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[debug] [2025-11-28T06:52:53.096Z] [hosting][populate queue][FINAL] {"max":405,"min":405,"avg":405,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":427}
+[debug] [2025-11-28T06:52:53.099Z] [hosting] uploads queued: 3
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:00:46.919Z] ----------------------------------------------------------------------
+[debug] [2025-11-28T07:00:46.922Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2025-11-28T07:00:46.922Z] CLI Version:   14.25.0
+[debug] [2025-11-28T07:00:46.922Z] Platform:      win32
+[debug] [2025-11-28T07:00:46.922Z] Node Version:  v24.11.1
+[debug] [2025-11-28T07:00:46.922Z] Time:          Fri Nov 28 2025 10:00:46 GMT+0300 (Arabian Standard Time)
+[debug] [2025-11-28T07:00:46.922Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-28T07:00:47.086Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-28T07:00:47.087Z] > authorizing via signed-in user (mohandesibrahim759@gmail.com)
+[debug] [2025-11-28T07:00:47.087Z] [iam] checking project ibrahimmessegs for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-11-28T07:00:47.089Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:47.089Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:47.090Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions [none]
+[debug] [2025-11-28T07:00:47.090Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions x-goog-quota-user=projects/ibrahimmessegs
+[debug] [2025-11-28T07:00:47.090Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T07:00:48.203Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions 200
+[debug] [2025-11-28T07:00:48.203Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ibrahimmessegs:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-28T07:00:48.204Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:48.204Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:48.205Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs [none]
+[debug] [2025-11-28T07:00:48.831Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs 200
+[debug] [2025-11-28T07:00:48.832Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibrahimmessegs {"projectId":"ibrahimmessegs","projectNumber":"426012859754","displayName":"ibrahimmessegs","name":"projects/ibrahimmessegs","resources":{"hostingSite":"ibrahimmessegs"},"state":"ACTIVE","etag":"1_47e88947-4612-437b-9b58-51722acffcd2"}
+[info] 
+[info] === Deploying to 'ibrahimmessegs'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-11-28T07:00:48.850Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:48.850Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:48.851Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions [none]
+[debug] [2025-11-28T07:00:48.854Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-11-28T07:00:50.516Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions 200
+[debug] [2025-11-28T07:00:50.517Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ibrahimmessegs/versions {"name":"projects/426012859754/sites/ibrahimmessegs/versions/fb897d14a3f57cb9","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[ibrahimmessegs]: beginning deploy... 
+[info] i  hosting[ibrahimmessegs]: found 12 files in . 
+[debug] [2025-11-28T07:00:50.561Z] [hosting] uploading with 200 concurrency
+[debug] [2025-11-28T07:00:50.603Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.603Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.605Z] [hosting] hash cache [] stored for 12 files
+[debug] [2025-11-28T07:00:50.607Z] [hosting][hash queue][FINAL] {"max":36,"min":0,"avg":3,"active":0,"complete":12,"success":12,"errored":0,"retried":0,"total":12,"elapsed":42}
+[debug] [2025-11-28T07:00:50.608Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/fb897d14a3f57cb9:populateFiles [none]
+[debug] [2025-11-28T07:00:50.608Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/fb897d14a3f57cb9:populateFiles {"files":{"/index.html":"58c05fc2d3436b8aaab8dcc1d78e0eab8f391ba442c5e2cef8564f7f4ac65a97","/style/style.css":"5b79e340a2efbd9ffd6fbf8f4772f59c71a3be741f19377fa820d108b822de6e","/js/script.js":"371627c8727b522713cdc2df8171bee716ec2119176cd57c8115787003b87bc2","/chat/chat-systym.html":"90a4c6d158790fc85b157d08cc195c2d97d5c9cce85e909548c3faf1ed7b9c1a","/chat/chat-style.css":"a571ded06e0e3d5db69f45ab2cde5ec4094967cd0a640d9c41a448a226940f22","/chat/chat-script.js":"ec04cbec4fdab2e7cc3e0f6d8ae3161abb255845ae80621d0d2abf293db5ca30","/chat/calls.js":"7741d1232214136fec2e14fcfac565e98a8c3b2d77d452fc1cdec70345146c11","/assets/img/mmm.png":"8093715949bdad1e551d8114ab22224cab7940a7bfdc1956c201d0cae1125e8d","/assets/img/ic_launcher.png":"9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","/assets/img/ibrahim.png":"31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","/assets/ico/favicon.ico":"ae18aad3abe9417669c2a0516c9e606f4bcb3707cf372f195faf5778ee5e3985","/assets/img/1.png":"88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e"}}
+[debug] [2025-11-28T07:00:50.974Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/fb897d14a3f57cb9:populateFiles 200
+[debug] [2025-11-28T07:00:50.975Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/426012859754/sites/ibrahimmessegs/versions/fb897d14a3f57cb9:populateFiles {"uploadRequiredHashes":["31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a","9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b","88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files"}
+[debug] [2025-11-28T07:00:50.978Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.978Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.980Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.980Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.982Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.982Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:00:50.983Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T07:00:50.984Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[debug] [2025-11-28T07:00:50.992Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T07:00:50.993Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[debug] [2025-11-28T07:00:50.997Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [none]
+[debug] [2025-11-28T07:00:50.998Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [stream]
+[debug] [2025-11-28T07:00:51.001Z] [hosting][populate queue][FINAL] {"max":380,"min":380,"avg":380,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":398}
+[debug] [2025-11-28T07:00:51.002Z] [hosting] uploads queued: 3
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:01:21.431Z] [uploadQueue] Retrying task 88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e
+[debug] [2025-11-28T07:01:21.433Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:21.433Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:21.434Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [none]
+[debug] [2025-11-28T07:01:21.434Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [stream]
+[debug] [2025-11-28T07:01:21.460Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T07:01:21.461Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:21.461Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:21.462Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T07:01:21.462Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:01:43.486Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T07:01:43.489Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:43.493Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:43.497Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T07:01:43.499Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:01:52.265Z] [uploadQueue] Retrying task 88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e
+[debug] [2025-11-28T07:01:52.266Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:52.271Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:52.275Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [none]
+[debug] [2025-11-28T07:01:52.277Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [stream]
+[debug] [2025-11-28T07:01:52.365Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T07:01:52.367Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:52.370Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:01:52.374Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T07:01:52.376Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:02:23.896Z] [uploadQueue] Retrying task 88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e
+[debug] [2025-11-28T07:02:23.898Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:23.900Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:23.903Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [none]
+[debug] [2025-11-28T07:02:23.905Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [stream]
+[debug] [2025-11-28T07:02:24.043Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T07:02:24.044Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:24.049Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:24.049Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T07:02:24.051Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:02:36.399Z] [uploadQueue] Retrying task 31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a
+[debug] [2025-11-28T07:02:36.401Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:36.403Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:36.406Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [none]
+[debug] [2025-11-28T07:02:36.408Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/31f39a2a38debe260572bb31a591974bd5f38f120044bf3e788b0470ac8e6a6a [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[debug] [2025-11-28T07:02:57.123Z] [uploadQueue] Retrying task 88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e
+[debug] [2025-11-28T07:02:57.124Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:57.128Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:57.128Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [none]
+[debug] [2025-11-28T07:02:57.129Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/88270cdbc11708efa2ac3328c74238166d2c41c0cc7d40811c87d2ff6061553e [stream]
+[debug] [2025-11-28T07:02:57.322Z] [uploadQueue] Retrying task 9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b
+[debug] [2025-11-28T07:02:57.323Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:57.324Z] Checked if tokens are valid: true, expires at: 1764314444260
+[debug] [2025-11-28T07:02:57.326Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [none]
+[debug] [2025-11-28T07:02:57.327Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/ibrahimmessegs/versions/fb897d14a3f57cb9/files/9142795550ddb11353868a9860d0459d5b5bcd2b6f3facae7987e7e1edfbd40b [stream]
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 

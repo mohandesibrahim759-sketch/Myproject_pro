@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الدردشة المتكامل المتقدم - ابراهيم المخلافي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chat-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <button class="auth-btn" id="authBtn">
+        <i class="fas fa-user"></i> تسجيل الدخول
+    </button>
+
+    <button class="settings-btn" id="settingsBtn">
+        <i class="fas fa-cog"></i> الإعدادات
+    </button>
+
+    <!-- الأزرار العائمة -->
+    <button class="floating-action-button" id="fabMain">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <div class="quick-actions-panel" id="quickActions">
+        <button class="quick-action" id="quickGroup">
+            <i class="fas fa-users"></i>
+            <span>مجموعة جديدة</span>
+        </button>
+        <button class="quick-action" id="quickPoll">
+            <i class="fas fa-chart-bar"></i>
+            <span>استطلاع رأي</span>
+        </button>
+        <button class="quick-action" id="quickWhiteboard">
+            <i class="fas fa-palette"></i>
+            <span>سبورة مشتركة</span>
+        </button>
+        <button class="quick-action" id="quickSchedule">
+            <i class="fas fa-calendar"></i>
+            <span>جدولة اجتماع</span>
+        </button>
+        <button class="quick-action" id="quickTheme">
+            <i class="fas fa-palette"></i>
+            <span>تبديل الثيم</span>
+        </button>
+        <button class="quick-action" id="quickDashboard">
+            <i class="fas fa-chart-line"></i>
+            <span>لوحة التحكم</span>
+        </button>
+        <button class="quick-action" id="quickStatus">
+            <i class="fas fa-circle"></i>
+            <span>الحالة</span>
+        </button>
+        <button class="quick-action" id="quickBackup">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>نسخ احتياطي</span>
+        </button>
+    </div>
+
+    <div class="chat-container">
+        <div class="connection-status disconnected" id="connectionStatus">
+            <i class="fas fa-wifi"></i> جاري الاتصال...
+        </div>
+
+        <div class="chat-header">
+            <div class="chat-avatar">
+                <img src="https://ui-avatars.com/api/?name=الدعم+الفني&background=128C7E&color=fff" alt="الدعم الفني">
+            </div>
+            <div class="chat-info">
+                <h4 id="currentChatName">الدعم الفني</h4>
+                <div class="chat-status" id="userStatus">جاري الاتصال...</div>
+            </div>
+            <div class="chat-actions">
+                <button class="chat-action-btn" id="statusBtn">
+                    <i class="fas fa-circle"></i>
+                </button>
+                <button class="chat-action-btn" id="conversationsToggle">
+                    <i class="fas fa-comments"></i>
+                </button>
+                <button class="chat-action-btn" id="themeToggle">
+                    <i class="fas fa-palette"></i>
+                </button>
+                <button class="chat-action-btn" id="chatVideoCall">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="chat-action-btn" id="chatVoiceCall">
+                    <i class="fas fa-phone"></i>
+                </button>
+                <button class="chat-action-btn" id="chatMenuBtn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- شريط البحث -->
+        <div class="chat-search-bar" id="chatSearchBar" style="display: none;">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="chatSearch" placeholder="ابحث في المحادثة...">
+                <button id="clearSearch" class="clear-search-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <div class="message-content">
+                    <h4>مرحباً بك في نظام الدردشة الخاصة بملمهندس ابراهيم المخلافي  !</h4>
+                    <p>هذا النظام تم تطويره  لاجل الدردشة والتواصل</p>
+                    <div class="quick-reply">
+                        <button class="quick-reply-btn" data-reply="الخدمات">الخدمات</button>
+                        <button class="quick-reply-btn" data-reply="المشاريع">المشاريع</button>
+                        <button class="quick-reply-btn" data-reply="الأسعار">الأسعار</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="chat-input-actions">
+                <button class="chat-input-btn" id="chatEmojiBtn">
+                    <i class="far fa-smile"></i>
+                </button>
+                <button class="chat-input-btn" id="shareLocationBtn">
+                    <i class="fas fa-map-marker-alt"></i>
+                </button>
+                <button class="chat-input-btn" id="chatAttachmentBtn">
+                    <i class="fas fa-paperclip"></i>
+                    <input type="file" id="fileInput" style="display: none;" accept="image/*, video/*, audio/*, .pdf, .doc, .docx" multiple>
+                </button>
+                <button class="chat-input-btn" id="voiceRecordBtn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+            
+            <div class="chat-input-wrapper">
+                <textarea id="chatInput" placeholder="اكتب رسالة..." rows="1"></textarea>
+            </div>
+            
+            <button class="send-btn" id="chatSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- شريط المحادثات الجانبي -->
+    <div class="conversations-sidebar" id="conversationsSidebar">
+        <div class="conversations-header" style="padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0;">المحادثات</h3>
+            <button id="closeConversations" style="background: none; border: none; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="conversations-list" id="conversationsList">
+            <!-- سيتم ملؤها بالجافاسكريبت -->
+        </div>
+        <button id="createConversationBtn" style="width: 100%; padding: 15px; background: var(--primary-color); color: white; border: none; cursor: pointer;">
+            <i class="fas fa-plus"></i> بدء محادثة جديدة
+        </button>
+    </div>
+
+    <!-- نافذة السبورة المشتركة -->
+    <div class="whiteboard-container" id="whiteboardContainer">
+        <div class="whiteboard-tools">
+            <button class="whiteboard-tool active" data-tool="pen">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button class="whiteboard-tool" data-tool="eraser">
+                <i class="fas fa-eraser"></i>
+            </button>
+            <button class="whiteboard-tool" data-tool="shape">
+                <i class="fas fa-square"></i>
+            </button>
+            <input type="color" class="whiteboard-tool" id="whiteboardColor" value="#000000">
+            <button class="whiteboard-tool" id="clearWhiteboard">
+                <i class="fas fa-trash"></i>
+            </button>
+            <button class="whiteboard-tool" id="saveWhiteboard">
+                <i class="fas fa-save"></i>
+            </button>
+            <button class="whiteboard-tool" id="closeWhiteboard">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <canvas id="whiteboardCanvas"></canvas>
+    </div>
+
+    <!-- لوحة التحكم الإدارية -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2>لوحة التحكم الإدارية</h2>
+            <button id="closeDashboard" style="background: none; border: none; font-size: 20px; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalUsers">0</div>
+                <div class="stat-label">إجمالي المستخدمين</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalMessages">0</div>
+                <div class="stat-label">إجمالي الرسائل</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeConversations">0</div>
+                <div class="stat-label">المحادثات النشطة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="onlineUsers">0</div>
+                <div class="stat-label">المستخدمين المتصلين</div>
+            </div>
+        </div>
+
+        <div class="analytics-chart">
+            <canvas id="analyticsChart"></canvas>
+        </div>
+
+        <div class="integration-panel">
+            <h3>التكامل مع المنصات</h3>
+            <div class="integration-item">
+                <div class="integration-logo">
+                    <i class="fab fa-slack"></i>
+                </div>
+                <span>Slack</span>
+                <button class="btn-primary" id="connectSlack">اتصال</button>
+            </div>
+            <div class="integration-item">
+                <div class="integration-logo">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <span>Discord</span>
+                <button class="btn-primary" id="connectDiscord">اتصال</button>
+            </div>
+        </div>
+
+        <!-- قسم النسخ الاحتياطي -->
+        <div class="backup-section" style="margin-top: 30px;">
+            <h3>النسخ الاحتياطي</h3>
+            <div class="backup-controls">
+                <button class="btn-primary" id="createBackupBtn">إنشاء نسخة احتياطية</button>
+                <button class="btn-outline" id="restoreBackupBtn">استعادة من نسخة</button>
+                <button class="btn-outline" id="manageBackupsBtn">إدارة النسخ</button>
+            </div>
+            <div id="backupStatus" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- نافذة الحالة (Status) -->
+    <div class="status-modal" id="statusModal">
+        <div class="status-modal-content">
+            <div class="status-header">
+                <h3>الحالة</h3>
+                <button id="closeStatus">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="status-list" id="statusList">
+                <!-- حالات الأصدقاء -->
+            </div>
+            <div class="add-status">
+                <div class="add-status-btn" id="addStatusBtn">
+                    <i class="fas fa-plus"></i>
+                    <span>إضافة حالة</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة حالة -->
+    <div class="create-status-modal" id="createStatusModal">
+        <div class="create-status-content">
+            <div class="create-status-header">
+                <h3>إنشاء حالة جديدة</h3>
+                <button id="closeCreateStatus">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="status-options">
+                <div class="status-option" data-type="text">
+                    <i class="fas fa-font"></i>
+                    <span>نص</span>
+                </div>
+                <div class="status-option" data-type="image">
+                    <i class="fas fa-image"></i>
+                    <span>صورة</span>
+                </div>
+                <div class="status-option" data-type="video">
+                    <i class="fas fa-video"></i>
+                    <span>فيديو</span>
+                </div>
+            </div>
+            <div class="status-privacy">
+                <h4>إعدادات الخصوصية</h4>
+                <select id="statusPrivacy">
+                    <option value="everyone">الجميع</option>
+                    <option value="contacts">جهات الاتصال فقط</option>
+                    <option value="except">الجميع ما عدا...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة المصادقة -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <div class="auth-modal-header">
+                <h3>تسجيل الدخول / إنشاء حساب</h3>
+                <button class="auth-modal-close" id="authModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">تسجيل الدخول</button>
+                <button class="auth-tab" data-tab="register">إنشاء حساب</button>
+            </div>
+            <form class="auth-form" id="authForm">
+                <div class="auth-form-group">
+                    <label for="authEmail">البريد الإلكتروني</label>
+                    <input type="email" id="authEmail" required>
+                </div>
+                <div class="auth-form-group">
+                    <label for="authPassword">كلمة المرور</label>
+                    <input type="password" id="authPassword" required>
+                </div>
+                <div class="auth-form-group" id="authNameGroup" style="display: none;">
+                    <label for="authName">الاسم الكامل</label>
+                    <input type="text" id="authName">
+                </div>
+                <button type="submit" class="auth-submit-btn" id="authSubmitBtn">تسجيل الدخول</button>
+                <div class="auth-error" id="authError"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة الإيموجي -->
+    <div class="emoji-modal" id="emojiModal">
+        <div class="emoji-modal-header">
+            <h4>الإيموجي</h4>
+            <button class="emoji-modal-close" id="emojiModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="emoji-categories" id="emojiCategories">
+            <!-- سيتم ملؤها بالجافاسكريبت -->
+        </div>
+        <div class="emoji-grid" id="emojiGrid">
+            <!-- سيتم ملؤها بالجافاسكريبت -->
+        </div>
+    </div>
+
+    <!-- نافذة القائمة -->
+    <div class="menu-modal" id="menuModal">
+        <button class="menu-item" id="menuProfile">
+            <i class="fas fa-user"></i>
+            <span>الملف الشخصي</span>
+        </button>
+        <button class="menu-item" id="menuSettings">
+            <i class="fas fa-cog"></i>
+            <span>الإعدادات</span>
+        </button>
+        <button class="menu-item" id="menuPrivacy">
+            <i class="fas fa-shield-alt"></i>
+            <span>الخصوصية</span>
+        </button>
+        <button class="menu-item" id="menuBackup">
+            <i class="fas fa-download"></i>
+            <span>نسخ احتياطي</span>
+        </button>
+        <button class="menu-item" id="menuLogout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>تسجيل الخروج</span>
+        </button>
+    </div>
+
+    <!-- نافذة المكالمة -->
+    <div class="call-modal" id="callModal">
+        <div class="call-modal-content">
+            <div class="call-avatar">
+                <img src="https://ui-avatars.com/api/?name=الدعم+الفني&background=128C7E&color=fff" alt="الدعم الفني">
+            </div>
+            <div class="call-info">
+                <h3 id="callParticipantName">الدعم الفني</h3>
+                <div class="call-status" id="callStatus">جاري الاتصال...</div>
+                <div class="call-timer" id="callTimer">00:00</div>
+            </div>
+            
+            <!-- عناصر الفيديو سيتم إضافتها ديناميكياً -->
+            
+            <div class="call-controls">
+                <button class="call-control-btn call-mute" id="callMute" title="كتم الصوت">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="call-control-btn call-video" id="callVideo" title="إيقاف الفيديو">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="call-control-btn call-screen-share" id="callScreenShare" title="مشاركة الشاشة">
+                    <i class="fas fa-desktop"></i>
+                </button>
+                <button class="call-control-btn call-end" id="callEnd" title="إنهاء المكالمة">
+                    <i class="fas fa-phone"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الخصوصية -->
+    <div class="privacy-modal" id="privacyModal">
+        <div class="privacy-modal-content">
+            <div class="privacy-header">
+                <h3>إعدادات الخصوصية</h3>
+                <button id="closePrivacy">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="privacy-settings">
+                <div class="privacy-setting">
+                    <label>آخر ظهور</label>
+                    <select id="lastSeenPrivacy">
+                        <option value="everyone">الجميع</option>
+                        <option value="contacts">جهات الاتصال فقط</option>
+                        <option value="nobody">لا أحد</option>
+                    </select>
+                </div>
+                <div class="privacy-setting">
+                    <label>صورة الملف الشخصي</label>
+                    <select id="profilePicturePrivacy">
+                        <option value="everyone">الجميع</option>
+                        <option value="contacts">جهات الاتصال فقط</option>
+                        <option value="nobody">لا أحد</option>
+                    </select>
+                </div>
+                <div class="privacy-setting">
+                    <label>الحالة</label>
+                    <select id="statusPrivacySetting">
+                        <option value="everyone">الجميع</option>
+                        <option value="contacts">جهات الاتصال فقط</option>
+                        <option value="nobody">لا أحد</option>
+                    </select>
+                </div>
+                <div class="privacy-setting">
+                    <label>إشعارات القراءة</label>
+                    <input type="checkbox" id="readReceipts" checked>
+                </div>
+            </div>
+            <button class="btn-primary" id="savePrivacySettings">حفظ الإعدادات</button>
+        </div>
+    </div>
+
+    <!-- مؤشر التسجيل الصوتي -->
+    <div class="voice-recorder" id="voiceRecorder" style="display: none;">
+        <div class="voice-recorder-content">
+            <div class="voice-wave"></div>
+            <div class="voice-timer">00:00</div>
+            <button class="voice-send-btn" id="voiceSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+            <button class="voice-cancel-btn" id="voiceCancel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- إضافة Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- ملفات JS المنفصلة -->
+    <script src="calls.js"></script>
+    <script src="chat-script.js"></script>
+</body>
+</html>
