@@ -4452,3 +4452,246 @@ body.loaded .product-card {
         font-size: 1.2rem;
     }
 }
+/* تحسينات الفوتر للهواتف */
+@media (max-width: 768px) {
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+  }
+  
+  .footer-links, 
+  .footer-services, 
+  .footer-newsletter {
+    flex: 0 0 calc(33.333% - 20px);
+    min-width: 150px;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-security {
+    display: flex;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-links, 
+  .footer-services, 
+  .footer-newsletter {
+    flex: 0 0 calc(50% - 10px);
+  }
+  
+  .footer-newsletter {
+    flex: 0 0 100%;
+    margin-top: 10px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-security {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links, 
+  .footer-services {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+  
+  .footer-links ul,
+  .footer-services ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .footer-links li,
+  .footer-services li {
+    margin-bottom: 0;
+  }
+}
+
+/* تحسينات النشرة البريدية على الهواتف */
+@media (max-width: 768px) {
+  .newsletter-form {
+    flex-direction: row;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .newsletter-form input {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .newsletter-form button {
+    flex-shrink: 0;
+  }
+}
+
+/* تحسينات عامة للهواتف */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 0 10px;
+  }
+  
+  section {
+    padding: 60px 0;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
+  }
+  
+  .hero-image {
+    order: -1;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-btns {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .about-content,
+  .skills-content,
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .projects-grid,
+  .blog-grid,
+  .store-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* تحسينات القائمة على الهواتف */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 80%;
+    height: calc(100vh - 80px);
+    background: var(--dark);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    transition: var(--transition);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+  
+  .nav-btns {
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* تحسينات إضافية للهواتف الصغيرة */
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+  
+  .typing-text {
+    font-size: 1.2rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .hero-btns .btn,
+  .about-actions .btn {
+    width: 100%;
+    max-width: 250px;
+    margin: 5px 0;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .floating-chat-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .chat-iframe-container {
+    width: calc(100vw - 20px);
+    left: 10px;
+    right: 10px;
+  }
+}
+
+/* تحسينات لشاشات صغيرة جداً */
+@media (max-width: 375px) {
+  .footer-links ul,
+  .footer-services ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer-logo .logo {
+    font-size: 1.4rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 1.6rem;
+  }
+}

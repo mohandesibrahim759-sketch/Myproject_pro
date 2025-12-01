@@ -34,16 +34,11 @@
     <link rel="manifest" href="/manifest.json">
     
     <!-- Preload Critical Resources -->
-   
-    <link rel="preload" href="style/style.css" as="style">
-  
 
-    
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="style/style.css">
    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Load Tajawal from Google Fonts only if reachable; otherwise rely on system/sans-serif fallback -->
+
     <script>
     (function(){
         const url = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap';
@@ -200,7 +195,7 @@
                 </div>
                 <div class="hero-image">
                     <div class="image-container" data-aos="fade-left" data-aos-delay="400">
-                        <img src="assets/img/1.jpg" alt="ابراهيم المخلافي" class="hero-img" loading="lazy">
+                        <img src="assets/img/1.png" alt="ابراهيم المخلافي" class="hero-img" loading="lazy">
                         <div class="floating-elements">
                             <div class="floating-element element-1">
                                 <i class="fab fa-html5"></i>
@@ -243,7 +238,7 @@
             <div class="about-content">
                 <div class="about-image" data-aos="fade-right">
                     <div class="image-frame">
-                        <img src="assets/img/1.jpg" alt="ابراهيم المخلافي" loading="lazy">
+                        <img src="assets/img/1.png" alt="ابراهيم المخلافي" loading="lazy">
                         <div class="experience-badge">
                             <span class="exp-number">3+</span>
                             <span class="exp-text">سنوات خبرة</span>
@@ -1027,241 +1022,14 @@
             </div>
         </div>
     </footer>
-<!-- زر الدردشة العائم -->
-<div class="floating-chat-btn" id="floatingChatBtn">
-    <i class="fas fa-comments"></i>
-    <span class="chat-notification" id="chatNotification"></span>
-</div>
 
-<script>
-// إضافة زر الدردشة العائم
-document.addEventListener('DOMContentLoaded', function() {
-    // إنشاء زر الدردشة العائم
-    const chatBtn = document.createElement('div');
-    chatBtn.id = 'floatingChatBtn';
-    chatBtn.className = 'floating-chat-btn';
-    chatBtn.innerHTML = `
+<button class="chat-opener-btn" id="chatOpenerBtn" onclick="openChatSystem()">
+    <div class="chat-opener-content">
         <i class="fas fa-comments"></i>
-        <span class="chat-notification" id="chatNotification"></span>
-    `;
-    
-    // إضافة الأنماط الأساسية
-    const style = document.createElement('style');
-    style.textContent = `
-        .floating-chat-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #6C63FF, #4A43D8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
-            z-index: 9999;
-            transition: all 0.3s ease;
-            border: none;
-            animation: pulse 2s infinite;
-        }
-        
-        .floating-chat-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(108, 99, 255, 0.4);
-        }
-        
-        .chat-notification {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #FF4757;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            display: none;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(108, 99, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
-        }
-        
-        .chat-iframe-container {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            z-index: 9998;
-            display: none;
-            overflow: hidden;
-            border: 2px solid #6C63FF;
-        }
-        
-        .chat-iframe-container.active {
-            display: block;
-            animation: slideUp 0.3s ease;
-        }
-        
-        @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .chat-iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 13px;
-        }
-        
-        .chat-close-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #FF4757;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-        
-        @media (max-width: 768px) {
-            .floating-chat-btn {
-                bottom: 15px;
-                left: 15px;
-                width: 55px;
-                height: 55px;
-                font-size: 1.3rem;
-            }
-            
-            .chat-iframe-container {
-                width: 300px;
-                height: 450px;
-                left: 15px;
-                bottom: 80px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .chat-iframe-container {
-                width: calc(100vw - 30px);
-                left: 15px;
-                right: 15px;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    document.body.appendChild(chatBtn);
-
-    // إنشاء حاوية الدردشة
-    const chatContainer = document.createElement('div');
-    chatContainer.id = 'chatContainer';
-    chatContainer.className = 'chat-iframe-container';
-    chatContainer.innerHTML = `
-        <button class="chat-close-btn" id="chatCloseBtn">
-            <i class="fas fa-times"></i>
-        </button>
-        <iframe src="chat/chat-systym.html" id="chatIframe"></iframe>
-    `;
-    document.body.appendChild(chatContainer);
-
-    // التحكم في فتح وإغلاق الدردشة
-    const floatingChatBtn = document.getElementById('floatingChatBtn');
-    const chatCloseBtn = document.getElementById('chatCloseBtn');
-    const chatIframe = document.getElementById('chatIframe');
-
-    floatingChatBtn.addEventListener('click', function() {
-        chatContainer.classList.toggle('active');
-        floatingChatBtn.style.transform = 'scale(1)';
-        floatingChatBtn.style.animation = 'none';
-        
-        // إعادة تحميل الدردشة عند الفتح لضمان التحديث
-        setTimeout(() => {
-            chatIframe.src = chatIframe.src;
-        }, 100);
-    });
-
-    chatCloseBtn.addEventListener('click', function() {
-        chatContainer.classList.remove('active');
-        floatingChatBtn.style.animation = 'pulse 2s infinite';
-    });
-
-    // إغلاق الدردشة عند النقر خارجها
-    document.addEventListener('click', function(event) {
-        if (!chatContainer.contains(event.target) && 
-            !floatingChatBtn.contains(event.target) && 
-            chatContainer.classList.contains('active')) {
-            chatContainer.classList.remove('active');
-            floatingChatBtn.style.animation = 'pulse 2s infinite';
-        }
-    });
-
-    // منع إغلاق الدردشة عند النقر داخلها
-    chatContainer.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
-    // الاستماع للرسائل من الدردشة للإشعارات
-    window.addEventListener('message', function(event) {
-        if (event.data && event.data.type === 'NEW_MESSAGE') {
-            showChatNotification();
-        }
-    });
-
-    // وظيفة عرض إشعار الدردشة
-    function showChatNotification() {
-        const notification = document.getElementById('chatNotification');
-        notification.style.display = 'flex';
-        notification.textContent = '!';
-        
-        // اهتزاز زر الدردشة
-        floatingChatBtn.style.animation = 'none';
-        setTimeout(() => {
-            floatingChatBtn.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                floatingChatBtn.style.transform = 'scale(1)';
-            }, 100);
-        }, 50);
-    }
-
-    // إخفاء الإشعار عند فتح الدردشة
-    floatingChatBtn.addEventListener('click', function() {
-        const notification = document.getElementById('chatNotification');
-        notification.style.display = 'none';
-    });
-
-    console.log('✅ تم تحميل زر الدردشة العائم بنجاح');
-});
-</script>
-
+        <span class="chat-opener-text">الدردشة</span>
+        <span class="chat-opener-badge" id="chatOpenerBadge">3</span>
+    </div>
+</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -1292,9 +1060,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Crypto utilities (used by chat-security when available) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
- 
+    <!-- Chat core security & adapter (must load after Firebase and CryptoJS) -->
+    <script src="js/chat/chat-security.js"></script>
+    <script src="js/chat/chat-firebase.js"></script>
+
     <!-- نظام المصادقة والواجهات -->
-   
+ 
 
     <!-- الملفات الرئيسية -->
     <script src="js/script.js"></script>
@@ -1325,6 +1096,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     </script>
+
+    <script>
+// دالة فتح نظام الدردشة
+function openChatSystem() {
+    // فتح ملف الدردشة في نافذة جديدة
+       window.location.href = 'chat-systym.html';
+        
+        // أو فتحه في نفس النافذة (اختر أحد الخيارين)
+        // window.location.href = 'chat-systym.html';
+    }
+
+    // إظهار إشعار عند وجود رسائل جديدة
+    function showChatNotification(count) {
+        const badge = document.getElementById('chatOpenerBadge');
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = 'flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 
+        showChatNotification(3);
+        
+       
+        setTimeout(() => {
+            showChatNotification(1);
+        }, 5000);
+    });
+</script>
 
 <script>
 // التهيئة بعد تحميل الصفحة
