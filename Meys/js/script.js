@@ -21,16 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormAnimations();
     initProjectsData();
     initBlogData();
-    
-    // الأنظمة الأساسية
-    initTestimonialsSystem();
-    
-    // الأنظمة الأخرى
-    initBookingSystem();
-    initStoreSystem();
-    initCMS();
-    initAnalytics();
-    initCaseStudies();
+    initTestimonials(); // نظام التقييمات الموحد
     
     console.log('✅ تم تحميل جميع الأنظمة بنجاح');
 });
@@ -40,10 +31,13 @@ function initLoader() {
     const loader = document.querySelector('.loader');
     if (!loader) return;
     
+    const loaderContent = document.querySelector('.loader-content');
+    if (!loaderContent) return;
+    
     const progressBar = document.createElement('div');
     progressBar.className = 'loader-progress';
     progressBar.innerHTML = '<div class="loader-progress-bar"></div>';
-    document.querySelector('.loader-content').appendChild(progressBar);
+    loaderContent.appendChild(progressBar);
     
     let progress = 0;
     const progressInterval = setInterval(() => {
@@ -109,7 +103,7 @@ function initNavigation() {
         link.addEventListener('click', function(e) {
             // Smooth scroll to section
             const targetId = this.getAttribute('href');
-            if (targetId.startsWith('#')) {
+            if (targetId && targetId.startsWith('#')) {
                 e.preventDefault();
                 const targetSection = document.querySelector(targetId);
                 if (targetSection) {
@@ -159,6 +153,7 @@ function initThemeToggle() {
     if (!themeToggle) return;
     
     const themeIcon = themeToggle.querySelector('i');
+    if (!themeIcon) return;
     
     // Check system preference
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -275,17 +270,17 @@ function initScrollEffects() {
     // Enhanced back to top button
     const backToTop = document.getElementById('backToTop');
     
-    window.addEventListener('scroll', function() {
-        const scrollY = window.scrollY;
-        
-        if (scrollY > 500) {
-            backToTop.classList.add('active');
-        } else {
-            backToTop.classList.remove('active');
-        }
-    });
-    
     if (backToTop) {
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            
+            if (scrollY > 500) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
         backToTop.addEventListener('click', function() {
             smoothScrollTo(document.body, 800);
         });
@@ -381,30 +376,49 @@ function initProjectFilter() {
     });
 }
 
-// نظام الاتصال المحسن
+// نظام الاتصال المحسن والمصحح
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
         console.log('📧 تحميل نموذج الاتصال...');
         
+        // إضافة التحقق من الحقول في الوقت الفعلي
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorElement = this.parentNode.querySelector('.error-message');
+                if (errorElement) {
+                    errorElement.remove();
+                }
+            });
+        });
+        
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // التحقق من جميع الحقول
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                showNotification('يرجى تصحيح الأخطاء في النموذج', 'error');
+                return;
+            }
+
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const subject = document.getElementById('subject').value.trim();
             const message = document.getElementById('message').value.trim();
-
-            if (!name || !email || !subject || !message) {
-                showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
-                return;
-            }
-
-            if (!validateEmail(email)) {
-                showNotification('البريد الإلكتروني غير صحيح', 'error');
-                return;
-            }
 
             // إرسال الإيميل مباشرة
             sendDirectEmail(name, email, subject, message);
@@ -412,14 +426,14 @@ function initContactForm() {
     }
 }
 
-// إرسال الإيميل مباشرة
+// إرسال الإيميل مباشرة - مصحح
 function sendDirectEmail(name, email, subject, message) {
     const emailBody = `
-اسم المرسل: ${name}
-البريد الإلكتروني: ${email}
+اسم المرسل: ${sanitizeInput(name)}
+البريد الإلكتروني: ${sanitizeInput(email)}
 
 الرسالة:
-${message}
+${sanitizeInput(message)}
 
 ---
 تم الإرسال من موقع ابراهيم المخلافي
@@ -432,10 +446,13 @@ ${message}
     
     showNotification('يتم فتح بريدك الإلكتروني... يرجى إرسال الرسالة', 'info');
     
-    // إعادة تعيين النموذج
+    // إعادة تعيين النموذج بعد تأكيد
     setTimeout(() => {
-        document.getElementById('contactForm').reset();
-        showNotification('شكراً لتواصلك! سأرد عليك قريباً 📧', 'success');
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.reset();
+            showNotification('شكراً لتواصلك! سأرد عليك قريباً 📧', 'success');
+        }
     }, 2000);
 }
 
@@ -452,7 +469,7 @@ function initCounters() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-count'));
+                const target = parseInt(counter.getAttribute('data-count') || 0);
                 const duration = 2000;
                 let start = null;
                 
@@ -485,92 +502,389 @@ function initCounters() {
     });
 }
 
-// Enhanced Testimonials Slider
+// نظام التقييمات المحسن والمضمون والمصحح
 function initTestimonials() {
-    const sliderContainer = document.querySelector('.testimonials-container');
-    const testimonials = document.querySelectorAll('.testimonial-card');
+    console.log('🌟 بدء تحميل نظام التقييمات...');
+    
+    // تحميل التقييمات من localStorage
+    let testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials'));
+    
+    if (!testimonials || !Array.isArray(testimonials)) {
+        testimonials = [
+            {
+                id: 1,
+                name: "أحمد محمد",
+                position: "مدير شركة تقنية",
+                content: "عمل ابراهيم كان استثنائياً. قام بتطوير موقعنا باحترافية عالية وتجاوز توقعاتنا. أنصح بالتعامل معه.",
+                rating: 5,
+                date: new Date().toISOString(),
+                approved: true
+            },
+            {
+                id: 2,
+                name: "فاطمة علي",
+                position: "صاحبة متجر إلكتروني",
+                content: "شكراً لابراهيم على العمل الرائع في تطوير متجرنا الإلكتروني. التصميم كان رائعاً والأداء ممتاز.",
+                rating: 5,
+                date: new Date().toISOString(),
+                approved: true
+            },
+            {
+                id: 3,
+                name: "خالد عبدالله",
+                position: "مدير مشاريع",
+                content: "محترف ومتميز في عمله. التزم بالمواعيد وأنتج عملًا يتجاوز التوقعات. سأعمل معه مرة أخرى.",
+                rating: 5,
+                date: new Date().toISOString(),
+                approved: true
+            }
+        ];
+        localStorage.setItem('ibrahim_testimonials', JSON.stringify(testimonials));
+    }
+
+    renderTestimonials(testimonials);
+    initTestimonialForm();
+    updateTestimonialsStats();
+    initTestimonialSlider();
+    
+    console.log('✅ نظام التقييمات جاهز');
+}
+
+function renderTestimonials(testimonials) {
+    const container = document.getElementById('testimonialsContainer');
+    if (!container) {
+        console.error('❌ لم يتم العثور على حاوية التقييمات');
+        return;
+    }
+
+    const approvedTestimonials = testimonials.filter(t => t.approved);
+    
+    if (approvedTestimonials.length === 0) {
+        container.innerHTML = `
+            <div class="testimonial-slide">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>لا توجد تقييمات حتى الآن. كن أول من يشارك تجربته!</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = approvedTestimonials.map(testimonial => `
+        <div class="testimonial-slide">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <div class="testimonial-rating">
+                        ${'★'.repeat(testimonial.rating)}${'☆'.repeat(5 - testimonial.rating)}
+                    </div>
+                    <p class="testimonial-text">"${sanitizeInput(testimonial.content)}"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4>${sanitizeInput(testimonial.name)}</h4>
+                        <span class="author-position">${sanitizeInput(testimonial.position)}</span>
+                        <span class="testimonial-date">${new Date(testimonial.date).toLocaleDateString('ar-EG')}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    console.log(`✅ تم عرض ${approvedTestimonials.length} تقييم`);
+}
+
+function initTestimonialForm() {
+    const form = document.getElementById('addTestimonialForm');
+    if (!form) {
+        console.error('❌ لم يتم العثور على نموذج التقييم');
+        return;
+    }
+
+    // نظام النجوم
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('clientRating');
+
+    if (!stars.length || !ratingInput) {
+        console.error('❌ لم يتم العثور على النجوم أو حقل التقييم');
+        return;
+    }
+
+    // إضافة أحداث النقر على النجوم
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            ratingInput.value = rating;
+            
+            // تحديث مظهر النجوم
+            stars.forEach(s => {
+                const sRating = parseInt(s.getAttribute('data-rating'));
+                if (sRating <= rating) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+        
+        // إضافة تأثير عند التمرير
+        star.addEventListener('mouseenter', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            stars.forEach(s => {
+                const sRating = parseInt(s.getAttribute('data-rating'));
+                if (sRating <= rating) {
+                    s.classList.add('hover');
+                }
+            });
+        });
+        
+        star.addEventListener('mouseleave', function() {
+            stars.forEach(s => s.classList.remove('hover'));
+        });
+    });
+
+    // تعيين 5 نجوم افتراضياً
+    stars.forEach(star => {
+        if (parseInt(star.getAttribute('data-rating')) <= 5) {
+            star.classList.add('active');
+        }
+    });
+
+    // إضافة التحقق من الحقول في الوقت الفعلي
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+        
+        input.addEventListener('input', function() {
+            this.classList.remove('error');
+            const errorElement = this.parentNode.querySelector('.error-message');
+            if (errorElement) {
+                errorElement.remove();
+            }
+        });
+    });
+
+    // إرسال النموذج
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('clientName').value.trim();
+        const position = document.getElementById('clientPosition').value.trim();
+        const content = document.getElementById('clientTestimonial').value.trim();
+        const rating = parseInt(document.getElementById('clientRating').value) || 5;
+
+        // التحقق من الحقول
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            showNotification('يرجى تصحيح الأخطاء في النموذج', 'error');
+            return;
+        }
+
+        if (content.length < 10) {
+            showNotification('الرأي يجب أن يكون على الأقل 10 أحرف', 'error');
+            return;
+        }
+
+        // إنشاء التقييم الجديد
+        const newTestimonial = {
+            id: Date.now(),
+            name: sanitizeInput(name),
+            position: sanitizeInput(position),
+            content: sanitizeInput(content),
+            rating: rating,
+            date: new Date().toISOString(),
+            approved: true
+        };
+
+        // جلب التقييمات الحالية من localStorage
+        const testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials')) || [];
+        
+        // إضافة التقييم الجديد في بداية المصفوفة
+        testimonials.unshift(newTestimonial);
+        
+        // حفظ في localStorage
+        localStorage.setItem('ibrahim_testimonials', JSON.stringify(testimonials));
+
+        // إعادة تحميل التقييمات
+        renderTestimonials(testimonials);
+        
+        // تحديث الإحصائيات
+        updateTestimonialsStats();
+
+        // إعادة تعيين النموذج
+        form.reset();
+        
+        // إعادة تعيين النجوم إلى 5 نجوم
+        stars.forEach(star => star.classList.remove('active'));
+        stars.forEach(star => {
+            if (parseInt(star.getAttribute('data-rating')) <= 5) {
+                star.classList.add('active');
+            }
+        });
+        ratingInput.value = '5';
+
+        showNotification('شكراً لك! تم إضافة تقييمك بنجاح 🎉', 'success');
+        
+        // إعادة تهيئة السلايدر
+        setTimeout(() => {
+            initTestimonialSlider();
+        }, 100);
+    });
+}
+
+function updateTestimonialsStats() {
+    const testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials')) || [];
+    const approvedTestimonials = testimonials.filter(t => t.approved);
+    
+    // تحديث العدد الإجمالي
+    const totalElement = document.getElementById('totalTestimonials');
+    if (totalElement) {
+        totalElement.textContent = approvedTestimonials.length;
+        totalElement.setAttribute('data-count', approvedTestimonials.length);
+    }
+
+    // تحديث متوسط التقييم
+    const averageElement = document.getElementById('averageRating');
+    if (averageElement && approvedTestimonials.length > 0) {
+        const totalRating = approvedTestimonials.reduce((sum, t) => sum + (t.rating || 0), 0);
+        const average = (totalRating / approvedTestimonials.length).toFixed(1);
+        averageElement.textContent = average;
+        averageElement.setAttribute('data-count', average);
+    } else if (averageElement) {
+        averageElement.textContent = '0';
+        averageElement.setAttribute('data-count', '0');
+    }
+
+    // تحديث عدد العملاء الراضين
+    const happyElement = document.getElementById('happyClients');
+    if (happyElement) {
+        const happyClients = approvedTestimonials.filter(t => (t.rating || 0) >= 4).length;
+        happyElement.textContent = happyClients;
+        happyElement.setAttribute('data-count', happyClients);
+    }
+
+    // تحديث نسبة العملاء العائدين (محسوبة من إجمالي التقييمات)
+    const returningElement = document.getElementById('returningClients');
+    if (returningElement) {
+        const totalClients = new Set(approvedTestimonials.map(t => t.name)).size;
+        const totalTestimonials = approvedTestimonials.length;
+        const returnRate = totalClients > 0 ? Math.round((totalTestimonials / totalClients) * 100) : 0;
+        returningElement.textContent = returnRate;
+        returningElement.setAttribute('data-count', returnRate);
+    }
+
+    // إعادة تشغيل العدادات
+    setTimeout(() => {
+        initCounters();
+    }, 500);
+}
+
+function initTestimonialSlider() {
+    const container = document.querySelector('.testimonials-container');
+    const slides = document.querySelectorAll('.testimonial-slide');
     const prevBtn = document.querySelector('.testimonial-prev');
     const nextBtn = document.querySelector('.testimonial-next');
+    const dotsContainer = document.querySelector('.testimonial-dots');
     
-    if (!sliderContainer || testimonials.length === 0) return;
+    if (!container || slides.length === 0) return;
     
-    let currentIndex = 0;
-    const totalTestimonials = testimonials.length;
+    let currentSlide = 0;
+    const totalSlides = slides.length;
     
-    // Set initial position
-    updateSliderPosition();
+    // إنشاء نقاط التنقل
+    if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'testimonial-dot';
+            dot.setAttribute('data-slide', i);
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
     
-    function updateSliderPosition() {
-        sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-        sliderContainer.style.transition = 'transform 0.5s ease-in-out';
-        
-        // تحديث النقاط النشطة
-        document.querySelectorAll('.testimonial-dot').forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
+    function goToSlide(n) {
+        currentSlide = (n + totalSlides) % totalSlides;
+        updateSlider();
     }
     
     function nextSlide() {
-        if (currentIndex >= totalTestimonials - 1) {
-            currentIndex = 0; // العودة للبداية
-        } else {
-            currentIndex++;
-        }
-        updateSliderPosition();
+        goToSlide(currentSlide + 1);
     }
     
     function prevSlide() {
-        if (currentIndex <= 0) {
-            currentIndex = totalTestimonials - 1; // الذهاب للنهاية
-        } else {
-            currentIndex--;
-        }
-        updateSliderPosition();
+        goToSlide(currentSlide - 1);
     }
     
-    // Event listeners
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    function updateSlider() {
+        // تحديث موضع السلايدر
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // تحديث النقاط النشطة
+        document.querySelectorAll('.testimonial-dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    // أحداث الأزرار
     if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
     
-    // Auto slide
-    let autoSlide = setInterval(nextSlide, 5000);
+    // التمرير التلقائي
+    let autoSlideInterval = setInterval(nextSlide, 5000);
     
-    // Pause auto-slide on hover
-    sliderContainer.addEventListener('mouseenter', () => {
-        clearInterval(autoSlide);
+    // إيقاف التمرير التلقائي عند التمرير فوق السلايدر
+    container.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
     });
     
-    sliderContainer.addEventListener('mouseleave', () => {
-        autoSlide = setInterval(nextSlide, 5000);
+    container.addEventListener('mouseleave', () => {
+        autoSlideInterval = setInterval(nextSlide, 5000);
     });
     
-    // Touch swipe support
-    let startX = 0;
-    let endX = 0;
+    // دعم السحب على الأجهزة اللوحية
+    let touchStartX = 0;
+    let touchEndX = 0;
     
-    sliderContainer.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
+    container.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
     });
     
-    sliderContainer.addEventListener('touchend', e => {
-        endX = e.changedTouches[0].clientX;
+    container.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].clientX;
         handleSwipe();
     });
     
     function handleSwipe() {
-        const diff = startX - endX;
-        if (Math.abs(diff) > 50) {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
             if (diff > 0) {
-                nextSlide();
+                nextSlide(); // سحب لليسار
             } else {
-                prevSlide();
+                prevSlide(); // سحب لليمين
             }
         }
     }
     
-    // جعل الدوال متاحة globally
-    window.nextSlide = nextSlide;
-    window.prevSlide = prevSlide;
+    // التهيئة الأولية
+    updateSlider();
+    
+    // جعل الدوال متاحة globally للتحكم
+    window.nextTestimonialSlide = nextSlide;
+    window.prevTestimonialSlide = prevSlide;
+    window.goToTestimonialSlide = goToSlide;
 }
 
 // Enhanced Blog
@@ -581,15 +895,20 @@ function initBlog() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.getAttribute('data-src') || img.src;
-                img.classList.add('loaded');
+                const dataSrc = img.getAttribute('data-src');
+                if (dataSrc) {
+                    img.src = dataSrc;
+                    img.classList.add('loaded');
+                }
                 imageObserver.unobserve(img);
             }
         });
     });
     
     blogImages.forEach(img => {
-        imageObserver.observe(img);
+        if (img.hasAttribute('data-src')) {
+            imageObserver.observe(img);
+        }
     });
 }
 
@@ -622,6 +941,28 @@ function initParticles() {
     for (let i = 0; i < 20; i++) {
         createParticle(particlesContainer);
     }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 6 + 2;
+    const posX = Math.random() * 100;
+    const posY = Math.random() * 100;
+    const duration = Math.random() * 20 + 10;
+    const delay = Math.random() * 5;
+    
+    particle.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        left: ${posX}%;
+        top: ${posY}%;
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+    `;
+    
+    container.appendChild(particle);
 }
 
 // Custom Cursor Effects
@@ -683,75 +1024,80 @@ function initFormAnimations() {
     });
 }
 
-// بيانات المشاريع
+// بيانات المشاريع المحسنة
 function initProjectsData() {
     const projects = [
         {
             id: 1,
             title: "موقع تجارة إلكترونية",
             description: "موقع متكامل للتجارة الإلكترونية مع نظام دفع آمن وإدارة للمخزون.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop",
             category: "web",
             tags: ["HTML", "CSS", "JavaScript", "React"],
             liveUrl: "#",
-            demoUrl: "#"
+            demoUrl: "#",
+            githubUrl: "https://github.com/ibrahimmkh"
         },
         {
             id: 2,
             title: "تطبيق إدارة المهام",
             description: "تطبيق ويب متكامل لإدارة المهام اليومية مع ميزات متقدمة.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w-800&auto=format&fit=crop",
             category: "web",
             tags: ["React", "Node.js", "MongoDB"],
             liveUrl: "#",
-            demoUrl: "#"
+            demoUrl: "#",
+            githubUrl: "https://github.com/ibrahimmkh"
         },
         {
             id: 3,
             title: "تصميم واجهة تطبيق جوال",
             description: "تصميم حديث وبديع لواجهة تطبيق جوال لخدمة التوصيل.",
-            image: "R.jfif",
+            image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop",
             category: "design",
             tags: ["Figma", "UI/UX", "Adobe XD"],
             liveUrl: "#",
-            demoUrl: "#"
+            demoUrl: "#",
+            githubUrl: "https://github.com/ibrahimmkh"
         },
         {
             id: 4,
             title: "تطبيق الياقة البدنية",
             description: "تطبيق جوال متكامل لمتابعة التمارين الرياضية واللياقة البدنية.",
-            image: "mmm.png",
+            image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop",
             category: "mobile",
             tags: ["React Native", "Firebase", "API"],
             liveUrl: "#",
-            demoUrl: "#"
+            demoUrl: "#",
+            githubUrl: "https://github.com/ibrahimmkh"
         },
         {
             id: 5,
             title: "منصة تعليمية",
             description: "منصة متكاملة للتعلم الإلكتروني مع نظام إدارة المحتوى.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop",
             category: "web",
             tags: ["Vue.js", "Laravel", "MySQL"],
             liveUrl: "#",
-            demoUrl: "#"
+            demoUrl: "#",
+            githubUrl: "https://github.com/ibrahimmkh"
         },
         {
             id: 6,
             title: "تطبيق إدارة المخزون",
             description: "تطبيق متكامل لإدارة المخزون والمبيعات للشركات الصغيرة.",
-            image: "assets/img/ic_launcher.png",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
             category: "mobile",
             tags: ["Flutter", "SQLite", "REST API"],
             liveUrl: "#",
-            demoUrl: "#"
+            demoUrl: "#",
+            githubUrl: "https://github.com/ibrahimmkh"
         }
     ];
 
     renderProjects(projects);
 }
 
-// عرض المشاريع
 function renderProjects(projects) {
     const projectsGrid = document.querySelector('.projects-grid');
     if (!projectsGrid) return;
@@ -769,10 +1115,10 @@ function renderProjects(projects) {
                 <img src="${project.image}" alt="${project.title}" loading="lazy">
                 <div class="project-overlay">
                     <div class="project-links">
-                        <a href="${project.liveUrl}" class="project-link" title="عرض المشروع">
+                        <a href="${project.liveUrl}" class="project-link" title="عرض المشروع" target="_blank" onclick="return handleProjectLink(event, '${project.githubUrl}')">
                             <i class="fas fa-external-link-alt"></i>
                         </a>
-                        <a href="${project.demoUrl}" class="project-link" title="عرض التفاصيل">
+                        <a href="${project.demoUrl}" class="project-link" title="عرض التفاصيل" target="_blank" onclick="return handleProjectLink(event, '${project.githubUrl}')">
                             <i class="fas fa-search"></i>
                         </a>
                     </div>
@@ -794,14 +1140,27 @@ function renderProjects(projects) {
     initProjectFilter();
 }
 
-// بيانات المدونة
+// معالج روابط المشاريع
+function handleProjectLink(event, githubUrl) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // إذا كان الرابط #، افتح GitHub
+    if (event.currentTarget.getAttribute('href') === '#') {
+        window.open(githubUrl || 'https://github.com/ibrahimmkh', '_blank');
+        return false;
+    }
+    return true;
+}
+
+// بيانات المدونة المحسنة
 function initBlogData() {
     const blogPosts = [
         {
             id: 1,
             title: "أفضل ممارسات تطوير الويب في 2024",
             excerpt: "تعرف على أحدث التقنيات والممارسات في مجال تطوير الويب لهذا العام.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop",
             date: "2024-01-15",
             category: "تطوير الويب",
             readTime: "5 دقائق",
@@ -811,7 +1170,7 @@ function initBlogData() {
             id: 2,
             title: "كيفية تحسين أداء مواقع الويب",
             excerpt: "نصائح وتقنيات عملية لتحسين سرعة وأداء مواقع الويب.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
             date: "2024-01-10",
             category: "أداء الموقع",
             readTime: "4 دقائق",
@@ -821,7 +1180,7 @@ function initBlogData() {
             id: 3,
             title: "مقدمة إلى React.js للمبتدئين",
             excerpt: "دليل شامل للبدء مع مكتبة React.js وتطوير تطبيقات ويب تفاعلية.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop",
             date: "2024-01-05",
             category: "أطر العمل",
             readTime: "7 دقائق",
@@ -831,7 +1190,7 @@ function initBlogData() {
             id: 4,
             title: "أهمية تجربة المستخدم في التصميم",
             excerpt: "لماذا تعتبر تجربة المستخدم العنصر الأهم في نجاح أي منتج رقمي.",
-            image: "assets/img/1.jpg",
+            image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop",
             date: "2024-01-01",
             category: "تصميم",
             readTime: "6 دقائق",
@@ -889,233 +1248,7 @@ function renderBlogPosts(posts) {
     });
 }
 
-// نظام التقييمات المحسن والمضمون
-function initTestimonialsSystem() {
-    console.log('🌟 بدء تحميل نظام التقييمات...');
-    
-    // تأخير التنفيذ لضمان تحميل الـ DOM
-    setTimeout(() => {
-        // تحميل التقييمات من localStorage
-        let testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials'));
-        
-        if (!testimonials) {
-            testimonials = [
-                {
-                    id: 1,
-                    name: "أحمد محمد",
-                    position: "مدير شركة تقنية",
-                    content: "عمل ابراهيم كان استثنائياً. قام بتطوير موقعنا باحترافية عالية وتجاوز توقعاتنا. أنصح بالتعامل معه.",
-                    rating: 5,
-                    date: new Date().toISOString(),
-                    approved: true
-                },
-                {
-                    id: 2,
-                    name: "فاطمة علي",
-                    position: "صاحبة متجر إلكتروني",
-                    content: "شكراً لابراهيم على العمل الرائع في تطوير متجرنا الإلكتروني. التصميم كان رائعاً والأداء ممتاز.",
-                    rating: 5,
-                    date: new Date().toISOString(),
-                    approved: true
-                },
-                {
-                    id: 3,
-                    name: "خالد عبدالله",
-                    position: "مدير مشاريع",
-                    content: "محترف ومتميز في عمله. التزم بالمواعيد وأنتج عملًا يتجاوز التوقعات. سأعمل معه مرة أخرى.",
-                    rating: 5,
-                    date: new Date().toISOString(),
-                    approved: true
-                }
-            ];
-            localStorage.setItem('ibrahim_testimonials', JSON.stringify(testimonials));
-        }
-
-        renderTestimonials(testimonials);
-        initTestimonialForm();
-        updateTestimonialsStats();
-        
-        console.log('✅ نظام التقييمات جاهز');
-    }, 500);
-}
-
-function renderTestimonials(testimonials) {
-    const container = document.getElementById('testimonialsContainer');
-    if (!container) {
-        console.error('❌ لم يتم العثور على حاوية التقييمات - testimonialsContainer');
-        return;
-    }
-
-    const approvedTestimonials = testimonials.filter(t => t.approved);
-    
-    if (approvedTestimonials.length === 0) {
-        container.innerHTML = `
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>لا توجد تقييمات حتى الآن. كن أول من يشارك تجربته!</p>
-                </div>
-            </div>
-        `;
-        return;
-    }
-
-    container.innerHTML = approvedTestimonials.map(testimonial => `
-        <div class="testimonial-card">
-            <div class="testimonial-content">
-                <div class="testimonial-rating">
-                    ${'★'.repeat(testimonial.rating)}${'☆'.repeat(5 - testimonial.rating)}
-                </div>
-                <p>"${testimonial.content}"</p>
-            </div>
-            <div class="testimonial-author">
-                <div class="author-info">
-                    <h4>${testimonial.name}</h4>
-                    <span>${testimonial.position}</span>
-                    <span class="testimonial-date">${new Date(testimonial.date).toLocaleDateString('ar-EG')}</span>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    console.log(`✅ تم عرض ${approvedTestimonials.length} تقييم`);
-}
-
-function initTestimonialForm() {
-    const form = document.getElementById('addTestimonialForm');
-    if (!form) {
-        console.error('❌ لم يتم العثور على نموذج التقييم - addTestimonialForm');
-        return;
-    }
-
-    // نظام النجوم
-    const stars = document.querySelectorAll('.star');
-    const ratingInput = document.getElementById('clientRating');
-
-    if (!stars.length || !ratingInput) {
-        console.error('❌ لم يتم العثور على النجوم أو حقل التقييم');
-        return;
-    }
-
-    // إضافة أحداث النقر على النجوم
-    stars.forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = parseInt(this.getAttribute('data-rating'));
-            ratingInput.value = rating;
-            
-            // تحديث مظهر النجوم
-            stars.forEach(s => {
-                const sRating = parseInt(s.getAttribute('data-rating'));
-                if (sRating <= rating) {
-                    s.classList.add('active');
-                } else {
-                    s.classList.remove('active');
-                }
-            });
-        });
-    });
-
-    // تعيين 5 نجوم افتراضياً
-    stars.forEach(star => {
-        if (parseInt(star.getAttribute('data-rating')) <= 5) {
-            star.classList.add('active');
-        }
-    });
-
-    // إرسال النموذج
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('clientName').value.trim();
-        const position = document.getElementById('clientPosition').value.trim();
-        const content = document.getElementById('clientTestimonial').value.trim();
-        const rating = parseInt(document.getElementById('clientRating').value);
-
-        // التحقق من الحقول
-        if (!name || !position || !content) {
-            showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
-            return;
-        }
-
-        if (content.length < 10) {
-            showNotification('الرأي يجب أن يكون至少 10 أحرف', 'error');
-            return;
-        }
-
-        // إنشاء التقييم الجديد
-        const newTestimonial = {
-            id: Date.now(),
-            name,
-            position,
-            content,
-            rating,
-            date: new Date().toISOString(),
-            approved: true
-        };
-
-        // جلب التقييمات الحالية من localStorage
-        const testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials')) || [];
-        
-        // إضافة التقييم الجديد في بداية المصفوفة
-        testimonials.unshift(newTestimonial);
-        
-        // حفظ في localStorage
-        localStorage.setItem('ibrahim_testimonials', JSON.stringify(testimonials));
-
-        // إعادة تحميل التقييمات
-        renderTestimonials(testimonials);
-        
-        // تحديث الإحصائيات
-        updateTestimonialsStats();
-
-        // إعادة تعيين النموذج
-        form.reset();
-        
-        // إعادة تعيين النجوم إلى 5 نجوم
-        stars.forEach(star => star.classList.remove('active'));
-        stars.forEach(star => {
-            if (parseInt(star.getAttribute('data-rating')) <= 5) {
-                star.classList.add('active');
-            }
-        });
-        ratingInput.value = '5';
-
-        showNotification('شكراً لك! تم إضافة تقييمك بنجاح 🎉', 'success');
-    });
-}
-
-function updateTestimonialsStats() {
-    const testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials')) || [];
-    const approvedTestimonials = testimonials.filter(t => t.approved);
-    
-    // تحديث العدد الإجمالي
-    const totalElement = document.getElementById('totalTestimonials');
-    if (totalElement) {
-        totalElement.textContent = approvedTestimonials.length;
-        totalElement.setAttribute('data-count', approvedTestimonials.length);
-    }
-
-    // تحديث متوسط التقييم
-    const averageElement = document.getElementById('averageRating');
-    if (averageElement && approvedTestimonials.length > 0) {
-        const average = (approvedTestimonials.reduce((sum, t) => sum + t.rating, 0) / approvedTestimonials.length).toFixed(1);
-        averageElement.textContent = average;
-    } else if (averageElement) {
-        averageElement.textContent = '0';
-    }
-
-    // تحديث عدد العملاء الراضين
-    const happyElement = document.getElementById('happyClients');
-    if (happyElement) {
-        const happyClients = approvedTestimonials.filter(t => t.rating >= 4).length;
-        happyElement.textContent = happyClients;
-        happyElement.setAttribute('data-count', happyClients);
-    }
-
-    // إعادة تشغيل العدادات
-    initCounters();
-}
-
-// نظام الحجوزات
+// نظام الحجوزات الأساسي
 function initBookingSystem() {
     const bookingForm = document.getElementById('bookingForm');
     const timeSlots = document.querySelectorAll('.time-slot');
@@ -1129,6 +1262,7 @@ function initBookingSystem() {
             timeSlots.forEach(s => s.classList.remove('active'));
             this.classList.add('active');
             selectedTime = this.textContent;
+            updateBookingSummary();
         });
     });
 
@@ -1151,12 +1285,27 @@ function initBookingSystem() {
         try {
             await new Promise(resolve => setTimeout(resolve, 2000));
             
+            // حفظ الحجز في localStorage
+            const booking = {
+                type: consultationType,
+                duration: duration,
+                time: selectedTime,
+                date: new Date().toISOString(),
+                status: 'confirmed'
+            };
+            
+            const bookings = JSON.parse(localStorage.getItem('ibrahim_bookings') || '[]');
+            bookings.push(booking);
+            localStorage.setItem('ibrahim_bookings', JSON.stringify(bookings));
+            
             showNotification(`تم حجز موعدك بنجاح! ${consultationType} - ${duration} دقيقة - ${selectedTime}`, 'success');
             bookingForm.reset();
             timeSlots.forEach(s => s.classList.remove('active'));
             selectedTime = null;
+            updateBookingSummary();
             
         } catch (error) {
+            console.error('Booking error:', error);
             showNotification('حدث خطأ أثناء الحجز. يرجى المحاولة مرة أخرى.', 'error');
         } finally {
             submitBtn.textContent = originalText;
@@ -1165,7 +1314,7 @@ function initBookingSystem() {
     });
 }
 
-// نظام المتجر
+// نظام المتجر الأساسي
 function initStoreSystem() {
     const storeFilters = document.querySelectorAll('.store-filters .filter-btn');
     const productCards = document.querySelectorAll('.product-card');
@@ -1234,53 +1383,69 @@ function initCMS() {
     };
 }
 
-// نظام التحليلات
+// نظام التحليلات الأساسي
 function initAnalytics() {
     const trackEvent = (category, action, label) => {
-        if (typeof gtag !== 'undefined') {
-            gtag('event', action, {
-                'event_category': category,
-                'event_label': label
-            });
-        }
-        
+        // تخزين محلي
         const analyticsData = loadFromCMS('analytics') || [];
         analyticsData.push({
             timestamp: new Date().toISOString(),
             category,
             action,
-            label
+            label,
+            page: window.location.pathname,
+            userAgent: navigator.userAgent
         });
+        
+        // الاحتفاظ بأخر 1000 حدث فقط
+        if (analyticsData.length > 1000) {
+            analyticsData.splice(0, analyticsData.length - 1000);
+        }
         
         saveToCMS('analytics', analyticsData);
     };
 
-    document.querySelectorAll('a, button').forEach(element => {
-        element.addEventListener('click', function() {
-            const text = this.textContent.trim() || this.getAttribute('aria-label') || 'Unknown';
-            trackEvent('Click', 'Link Click', text);
-        });
+    // تتبع النقرات
+    document.addEventListener('click', function(e) {
+        const target = e.target;
+        const button = target.closest('button');
+        const link = target.closest('a');
+        
+        if (button) {
+            trackEvent('Click', 'Button Click', button.textContent.trim() || 'Unknown Button');
+        } else if (link) {
+            trackEvent('Click', 'Link Click', link.textContent.trim() || link.getAttribute('href') || 'Unknown Link');
+        }
     });
 
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function() {
-            trackEvent('Form', 'Form Submit', this.id || 'Unknown Form');
-        });
+    // تتبع إرسال النماذج
+    document.addEventListener('submit', function(e) {
+        const form = e.target;
+        trackEvent('Form', 'Form Submit', form.id || 'Unknown Form');
     });
 
+    // تتبع التمرير
     let scrollTracked = false;
     window.addEventListener('scroll', function() {
         if (!scrollTracked && window.scrollY > window.innerHeight * 0.5) {
             trackEvent('Engagement', 'Scroll', '50% Page Height');
             scrollTracked = true;
         }
+        
+        if (window.scrollY > window.innerHeight * 0.9) {
+            trackEvent('Engagement', 'Scroll', '90% Page Height');
+        }
     });
 
+    // تتبع الوقت
     let startTime = Date.now();
     window.addEventListener('beforeunload', function() {
         const timeSpent = Math.round((Date.now() - startTime) / 1000);
         trackEvent('Engagement', 'Time Spent', `${timeSpent} seconds`);
     });
+
+    // تتبع الصفحة الأولى
+    trackEvent('Page', 'View', window.location.pathname);
 }
 
 // نظام حالات الدراسة
@@ -1288,10 +1453,37 @@ function initCaseStudies() {
     const caseStudies = document.querySelectorAll('.case-study-card');
     
     caseStudies.forEach(study => {
-        study.addEventListener('click', function() {
-            this.classList.toggle('expanded');
-        });
+        const expandBtn = study.querySelector('.case-study-toggle');
+        if (expandBtn) {
+            expandBtn.addEventListener('click', function() {
+                study.classList.toggle('expanded');
+                this.textContent = study.classList.contains('expanded') ? 'تصغير التفاصيل' : 'عرض التفاصيل';
+            });
+        }
     });
+}
+
+// تحديث ملخص الحجز
+function updateBookingSummary() {
+    const consultationType = document.getElementById('consultationType')?.value;
+    const duration = document.getElementById('duration')?.value;
+    const selectedSlot = document.querySelector('.time-slot.active')?.textContent;
+    
+    if (consultationType && duration && selectedSlot) {
+        const summary = `
+            <h4>ملخص الحجز</h4>
+            <p><strong>نوع الاستشارة:</strong> ${consultationType}</p>
+            <p><strong>المدة:</strong> ${duration} دقيقة</p>
+            <p><strong>الوقت:</strong> ${selectedSlot}</p>
+            <p><strong>التاريخ:</strong> ${new Date().toLocaleDateString('ar-EG')}</p>
+        `;
+        
+        const summaryElement = document.getElementById('bookingSummary');
+        if (summaryElement) {
+            summaryElement.innerHTML = summary;
+            summaryElement.style.display = 'block';
+        }
+    }
 }
 
 // Utility Functions
@@ -1337,7 +1529,10 @@ function validateField(field) {
         case 'clientName':
             if (value.length < 2) {
                 isValid = false;
-                errorMessage = 'الاسم يجب أن يكون至少 حرفين';
+                errorMessage = 'الاسم يجب أن يكون على الأقل حرفين';
+            } else if (value.length > 50) {
+                isValid = false;
+                errorMessage = 'الاسم لا يجب أن يتجاوز 50 حرفاً';
             }
             break;
         case 'email':
@@ -1350,14 +1545,17 @@ function validateField(field) {
         case 'clientPosition':
             if (value.length < 3) {
                 isValid = false;
-                errorMessage = 'هذا الحقل يجب أن يكون至少 3 أحرف';
+                errorMessage = 'هذا الحقل يجب أن يكون على الأقل 3 أحرف';
             }
             break;
         case 'message':
         case 'clientTestimonial':
             if (value.length < 10) {
                 isValid = false;
-                errorMessage = 'هذا الحقل يجب أن يكون至少 10 أحرف';
+                errorMessage = 'هذا الحقل يجب أن يكون على الأقل 10 أحرف';
+            } else if (value.length > 1000) {
+                isValid = false;
+                errorMessage = 'هذا الحقل لا يجب أن يتجاوز 1000 حرف';
             }
             break;
     }
@@ -1387,28 +1585,6 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    const size = Math.random() * 6 + 2;
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
-    const duration = Math.random() * 20 + 10;
-    const delay = Math.random() * 5;
-    
-    particle.style.cssText = `
-        width: ${size}px;
-        height: ${size}px;
-        left: ${posX}%;
-        top: ${posY}%;
-        animation-duration: ${duration}s;
-        animation-delay: ${delay}s;
-    `;
-    
-    container.appendChild(particle);
-}
-
 // Enhanced Notification System
 function showNotification(message, type = 'info') {
     const existingNotification = document.querySelector('.notification');
@@ -1429,18 +1605,11 @@ function showNotification(message, type = 'info') {
     notification.innerHTML = `
         <div class="notification-content">
             <i class="fas ${icons[type] || icons.info}"></i>
-            <span class="notification-message">${message}</span>
+            <span class="notification-message">${sanitizeInput(message)}</span>
             <button class="notification-close">&times;</button>
         </div>
         <div class="notification-progress"></div>
     `;
-    
-    if (!document.querySelector('#notification-styles')) {
-        const styleSheet = document.createElement('style');
-        styleSheet.id = 'notification-styles';
-        styleSheet.textContent = getNotificationStyles();
-        document.head.appendChild(styleSheet);
-    }
     
     document.body.appendChild(notification);
     
@@ -1483,176 +1652,91 @@ function closeNotification(notification) {
     }, 300);
 }
 
-function getNotificationStyles() {
-    return `
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--dark);
-            color: white;
-            padding: 0;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            z-index: 10000;
-            transform: translateX(150%);
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 1px solid rgba(108, 99, 255, 0.2);
-            overflow: hidden;
-            min-width: 300px;
-            max-width: 400px;
-        }
-        .notification.show {
-            transform: translateX(0);
-        }
-        .notification.success {
-            border-left: 4px solid #4CAF50;
-        }
-        .notification.error {
-            border-left: 4px solid #F44336;
-        }
-        .notification.info {
-            border-left: 4px solid #2196F3;
-        }
-        .notification.warning {
-            border-left: 4px solid #FF9800;
-        }
-        .notification-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 20px;
-        }
-        .notification-content i {
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-        .notification.success i { color: #4CAF50; }
-        .notification.error i { color: #F44336; }
-        .notification.info i { color: #2196F3; }
-        .notification.warning i { color: #FF9800; }
-        .notification-message {
-            flex: 1;
-            font-weight: 500;
-        }
-        .notification-close {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.7);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 5px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-        .notification-close:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
-        .notification-progress {
-            width: 100%;
-            height: 3px;
-            background: rgba(108, 99, 255, 0.3);
-            animation: notificationProgress 5s linear forwards;
-        }
-        @keyframes notificationProgress {
-            from { width: 100%; }
-            to { width: 0%; }
-        }
-    `;
+// Sanitize input to prevent XSS
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
 }
-
-// Additional CSS animations
-const additionalStyles = `
-    .stars-rating {
-        display: flex;
-        gap: 5px;
-        margin: 10px 0;
-        direction: ltr;
-        justify-content: flex-end;
-    }
-    
-    .star {
-        font-size: 24px;
-        color: #ddd;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    
-    .star:hover,
-    .star.active {
-        color: #ffc107;
-        transform: scale(1.1);
-    }
-    
-    .testimonial-rating {
-        color: #ffc107;
-        font-size: 18px;
-        margin-bottom: 10px;
-        direction: ltr;
-        text-align: right;
-    }
-    
-    .rating-section {
-        margin: 20px 0;
-        text-align: right;
-    }
-    
-    .rating-section label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 500;
-        color: var(--text-color);
-    }
-    
-    .testimonial-dots {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-    }
-    
-    .testimonial-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--border-color);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    
-    .testimonial-dot.active {
-        background: var(--primary);
-        transform: scale(1.2);
-    }
-`;
-
-// Add additional styles to the page
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
 
 // دوال المساعدة للإدارة
 function showTestimonialsInConsole() {
     const testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials')) || [];
     console.log('📊 التقييمات الحالية:', testimonials);
+    console.log(`عدد التقييمات: ${testimonials.length}`);
+    console.log(`عدد التقييمات المعتمدة: ${testimonials.filter(t => t.approved).length}`);
+    
+    // تصدير كـ JSON
+    const json = JSON.stringify(testimonials, null, 2);
+    console.log('📥 JSON للتصدير:', json);
+    
     return testimonials;
+}
+
+function exportTestimonials() {
+    const testimonials = JSON.parse(localStorage.getItem('ibrahim_testimonials')) || [];
+    const dataStr = JSON.stringify(testimonials, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    
+    const exportFileDefaultName = `testimonials-${new Date().toISOString().split('T')[0]}.json`;
+    
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+    
+    showNotification('تم تصدير التقييمات بنجاح', 'success');
+}
+
+function importTestimonials(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (Array.isArray(data)) {
+                localStorage.setItem('ibrahim_testimonials', JSON.stringify(data));
+                initTestimonials();
+                showNotification('تم استيراد التقييمات بنجاح', 'success');
+            } else {
+                showNotification('الملف غير صالح', 'error');
+            }
+        } catch (error) {
+            showNotification('خطأ في قراءة الملف', 'error');
+        }
+    };
+    reader.readAsText(file);
 }
 
 function clearAllTestimonials() {
     if (confirm('هل تريد حذف جميع التقييمات؟')) {
         localStorage.removeItem('ibrahim_testimonials');
-        initTestimonialsSystem();
+        initTestimonials();
         showNotification('تم حذف جميع التقييمات', 'info');
     }
+}
+
+function backupAllData() {
+    const data = {
+        testimonials: JSON.parse(localStorage.getItem('ibrahim_testimonials') || '[]'),
+        bookings: JSON.parse(localStorage.getItem('ibrahim_bookings') || '[]'),
+        analytics: JSON.parse(localStorage.getItem('cms_analytics') || '[]'),
+        backupDate: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    
+    const exportFileDefaultName = `backup-${new Date().toISOString().split('T')[0]}.json`;
+    
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+    
+    showNotification('تم إنشاء نسخة احتياطية', 'success');
 }
 
 // جعل الدوال متاحة globally
@@ -1660,5 +1744,7 @@ window.showTestimonialsInConsole = showTestimonialsInConsole;
 window.clearAllTestimonials = clearAllTestimonials;
 window.smoothScrollTo = smoothScrollTo;
 window.showNotification = showNotification;
+window.exportTestimonials = exportTestimonials;
+window.backupAllData = backupAllData;
 
 console.log('✅ تم تحميل جميع الأنظمة بنجاح');

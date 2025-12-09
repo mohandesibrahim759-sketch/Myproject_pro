@@ -151,10 +151,10 @@
                 </ul>
                 <div class="nav-btns">
                     <button id="loginBtn" class="btn btn-secondary" style="margin-inline-start:8px">تسجيل/دخول</button>
-                    <button class="theme-toggle" id="themeToggle">
+                    <button class="theme-toggle" id="themeToggle" >
                         <i class="fas fa-moon"></i>
                     </button>
-                    <a href="#booking" class="btn btn-primary">حجز موعد</a>
+                
                     <div class="hamburger" id="hamburger">
                         <span></span>
                         <span></span>
@@ -195,7 +195,7 @@
                 </div>
                 <div class="hero-image">
                     <div class="image-container" data-aos="fade-left" data-aos-delay="400">
-                        <img src="assets/img/1.jpg" alt="ابراهيم المخلافي" class="hero-img" loading="lazy">
+                        <img src="assets/img/1.png" alt="ابراهيم المخلافي" class="hero-img" loading="lazy">
                         <div class="floating-elements">
                             <div class="floating-element element-1">
                                 <i class="fab fa-html5"></i>
@@ -238,7 +238,7 @@
             <div class="about-content">
                 <div class="about-image" data-aos="fade-right">
                     <div class="image-frame">
-                        <img src="assets/img/1.jpg" alt="ابراهيم المخلافي" loading="lazy">
+                        <img src="assets/img/1.png" alt="ابراهيم المخلافي" loading="lazy">
                         <div class="experience-badge">
                             <span class="exp-number">3+</span>
                             <span class="exp-text">سنوات خبرة</span>
@@ -627,127 +627,126 @@
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-aos="fade-up">آراء العملاء</h2>
-                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-                    ماذا يقول عملاؤنا عن تجربتهم معنا
-                </p>
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-aos="fade-up">آراء العملاء</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                ماذا يقول عملاؤنا عن تجربتهم معنا
+            </p>
+        </div>
+
+        <!-- شريط التقدم -->
+        <div class="scroll-progress">
+            <div class="scroll-progress-bar"></div>
+        </div>
+
+        <!-- حاوية آراء العملاء -->
+        <div class="testimonials-wrapper">
+            <div id="testimonialsContainer" class="testimonials-container">
+                <!-- سيتم إضافة الآراء ديناميكياً عبر JavaScript -->
             </div>
 
-            <!-- شريط التقدم -->
-            <div class="scroll-progress">
-                <div class="scroll-progress-bar"></div>
+            <!-- أزرار التنقل -->
+            <button class="testimonial-nav-btn testimonial-prev">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="testimonial-nav-btn testimonial-next">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- مؤشر الصفحات -->
+            <div class="testimonial-dots">
+                <!-- سيتم إضافة النقاط ديناميكياً -->
             </div>
+        </div>
 
-            <!-- حاوية آراء العملاء -->
-            <div class="testimonials-wrapper">
-                <div class="testimonials-container">
-                    <!-- سيتم إضافة الآراء ديناميكياً عبر JavaScript -->
-                </div>
-
-                <!-- أزرار التنقل -->
-                <button class="testimonial-nav-btn testimonial-prev">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                <button class="testimonial-nav-btn testimonial-next">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <!-- مؤشر الصفحات -->
-                <div class="testimonial-dots">
-                    <!-- سيتم إضافة النقاط ديناميكياً -->
-                </div>
-            </div>
-
-            <!-- نموذج إضافة رأي جديد -->
-            <div class="add-testimonial-section" data-aos="fade-up">
-                <div class="add-testimonial-card">
-                    <h3>أضف رأيك</h3>
-                    <p>شاركنا تجربتك وآرائك حول خدماتنا</p>
-                    
-                    <form id="addTestimonialForm" class="testimonial-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="clientName" class="form-control" required>
-                                <label for="clientName">الاسم الكامل</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="clientPosition" class="form-control" required>
-                                <label for="clientPosition">الوظيفة/المنصب</label>
-                            </div>
-                        </div>
-                        
+        <!-- نموذج إضافة رأي جديد -->
+        <div class="add-testimonial-section" data-aos="fade-up">
+            <div class="add-testimonial-card">
+                <h3>أضف رأيك</h3>
+                <p>شاركنا تجربتك وآرائك حول خدماتنا</p>
+                
+                <form id="addTestimonialForm" class="testimonial-form">
+                    <div class="form-row">
                         <div class="form-group">
-                            <textarea id="clientTestimonial" class="form-control" rows="5" required></textarea>
-                            <label for="clientTestimonial">رأيك وتقييمك</label>
+                            <input type="text" id="clientName" class="form-control" required>
+                            <label for="clientName">الاسم الكامل</label>
                         </div>
-
-                        <!-- نظام التقييم بالنجوم -->
-                        <div class="rating-section">
-                            <label>تقييمك:</label>
-                            <div class="stars-rating">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </div>
-                            <input type="hidden" id="clientRating" value="5">
+                        <div class="form-group">
+                            <input type="text" id="clientPosition" class="form-control" required>
+                            <label for="clientPosition">الوظيفة/المنصب</label>
                         </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="clientTestimonial" class="form-control" rows="5" required></textarea>
+                        <label for="clientTestimonial">رأيك وتقييمك</label>
+                    </div>
 
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            إضافة الرأي
-                        </button>
-                    </form>
-                </div>
+                    <!-- نظام التقييم بالنجوم -->
+                    <div class="rating-section">
+                        <label>تقييمك:</label>
+                        <div class="stars-rating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="hidden" id="clientRating" value="5">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        إضافة الرأي
+                    </button>
+                </form>
             </div>
+        </div>
 
-            <!-- إحصائيات الآراء -->
-            <div class="testimonials-stats" data-aos="fade-up">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-number" data-count="50">0</h3>
-                            <p>عميل راضٍ</p>
-                        </div>
+        <!-- إحصائيات الآراء -->
+        <div class="testimonials-stats" data-aos="fade-up">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-number" data-count="4.9">0</h3>
-                            <p>متوسط التقييم</p>
-                        </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="happyClients" data-count="36">0</h3>
+                        <p>عميل راضٍ</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-number" data-count="127">0</h3>
-                            <p>رأي مضافة</p>
-                        </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-number" data-count="95">0</h3>
-                            <p>% عملاء عائدون</p>
-                        </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="averageRating" data-count="4.9">0</h3>
+                        <p>متوسط التقييم</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="totalTestimonials" data-count="127">0</h3>
+                        <p>رأي مضافة</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="returningClients" data-count="95">0</h3>
+                        <p>% عملاء عائدون</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Blog Section -->
     <section class="blog" id="blog">
         <div class="container">

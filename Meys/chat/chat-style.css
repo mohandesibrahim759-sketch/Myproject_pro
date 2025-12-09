@@ -44,7 +44,726 @@
     --bg-color: #E3F2FD;
     --chat-bg: #BBDEFB;
 }
+/* إضافة في بداية ملف chat-style.css */
 
+/* ============================================= */
+/* تحسينات للهواتف المحمولة */
+/* ============================================= */
+
+/* تأمين viewport للهواتف */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+}
+
+/* منع الزوم التلقائي على حقول الإدخال */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important; /* منع المتصفحات من التكبير التلقائي */
+  }
+}
+
+/* تحسينات الهواتف الأساسية */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100vw;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --header-height: 50px;
+    --avatar-md: 40px;
+    --avatar-lg: 50px;
+  }
+  
+  body {
+    font-size: 14px;
+    -webkit-tap-highlight-color: transparent; /* إزالة التأثير الأزرق عند النقر على الهواتف */
+  }
+  
+  .app-container {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* الشريط العلوي */
+  .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .auth-btn, .settings-btn {
+    position: static;
+    padding: 8px 12px;
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  .auth-btn {
+    right: auto;
+  }
+  
+  .settings-btn {
+    right: auto;
+  }
+  
+  /* الحاوية الرئيسية للدردشة */
+  .chat-container {
+    margin-top: 50px;
+    height: calc(100vh - 50px);
+    border-radius: 0;
+  }
+  
+  .chat-header {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+    padding: 10px;
+    height: 60px;
+  }
+  
+  .chat-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .chat-avatar img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .chat-info h4 {
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .chat-status {
+    font-size: 11px;
+  }
+  
+  .chat-actions {
+    gap: 5px;
+  }
+  
+  .chat-action-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+  
+  /* منطقة الرسائل */
+  .messages-container {
+    padding-top: 120px; /* رأس الدردشة + الشريط العلوي */
+    padding-bottom: 70px; /* شريط الإدخال */
+    height: 100%;
+  }
+  
+  .chat-messages {
+    min-height: calc(100vh - 190px);
+  }
+  
+  /* شريط الإدخال المحسن */
+  .chat-input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+    z-index: 9999;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .chat-input-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  
+  .chat-input-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--surface-light);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .chat-input-wrapper {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  #chatInput {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: var(--surface-light);
+    color: var(--text-color);
+    font-size: 14px;
+    resize: none;
+    max-height: 80px;
+    min-height: 40px;
+  }
+  
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
+  /* زر الفعل الرئيسي */
+  .floating-action-button {
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    z-index: 9990;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
+  .quick-actions-panel {
+    bottom: 125px;
+    right: 15px;
+    width: 180px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* الرسائل */
+  .message {
+    max-width: 85%;
+    margin-bottom: 8px;
+  }
+  
+  .message-bubble {
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  .message-sender {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+  
+  .message-meta {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+  
+  /* المودال والنوافذ المنبثقة */
+  .modal-content {
+    width: 95vw;
+    max-height: 85vh;
+    margin: 0;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  .modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+  
+  /* السبورة المشتركة */
+  .whiteboard-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    background: white;
+  }
+  
+  .whiteboard-tools {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+  }
+  
+  .whiteboard-tool {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  
+  #whiteboardCanvas {
+    width: 100vw;
+    height: 100vh;
+    touch-action: none;
+  }
+  
+  
+  
+  /* لوحة التحكم */
+  .admin-dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  /* نافذة الحالة */
+  .status-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    padding: 20px;
+  }
+  
+  .status-modal-content {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  /* نافذة الإيموجي */
+  .emoji-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    z-index: 10000;
+    background: var(--surface-color);
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .emoji-grid {
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+  
+  /* تسجيل الصوت */
+  .voice-recorder {
+    position: fixed;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+/* تحسينات للهواتف الصغيرة جداً */
+@media (max-width: 480px) {
+  :root {
+    --space-md: 8px;
+    --space-lg: 12px;
+    --space-xl: 16px;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-actions-panel {
+    width: 160px;
+  }
+  
+  .quick-action {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+/* تحسينات للوضع الأفقي */
+@media (max-width: 768px) and (orientation: landscape) {
+  .chat-header {
+    height: 50px;
+  }
+  
+  .messages-container {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+  
+  .chat-messages {
+    min-height: calc(100vh - 160px);
+  }
+  
+  .emoji-modal {
+    height: 40vh;
+  }
+}
+
+/* تحسينات اللمس */
+@media (hover: none) and (pointer: coarse) {
+  .chat-action-btn,
+  .chat-input-btn,
+  .send-btn,
+  .quick-action,
+  .message-action,
+  .emoji-item {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .conversation-item {
+    padding: 12px 15px;
+  }
+  
+  /* تحسين قابلية النقر */
+  .message-reaction {
+    padding: 8px 12px;
+  }
+  
+  /* منع التمرير الأفقي غير المقصود */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* تحسينات للشريط الجانبي على الهواتف */
+.sidebar {
+  display: none;
+}
+
+.sidebar.show {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  width: 100vw;
+}
+
+/* تحسين شريط حالة الاتصال */
+.connection-status {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 9997;
+  padding: 8px;
+  font-size: 12px;
+}
+
+/* تحسينات الوضع الداكن على الهواتف */
+[data-theme="dark"] .chat-input-container {
+  background: var(--surface-color);
+  border-top-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-content {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+/* تحسينات الصور والفيديوهات على الهواتف */
+.message-image,
+.message-video {
+  max-width: 100%;
+  max-height: 50vh;
+}
+
+/* تحسينات التنقل في الرسائل */
+.chat-messages {
+  scroll-behavior: smooth;
+}
+
+/* منع اختيار النص عند النقر المزدوج على الهواتف */
+@media (max-width: 768px) {
+  .message-bubble {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* تحسينات الإيموجي على الهواتف */
+@media (max-width: 768px) {
+  .emoji-item {
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+  }
+  
+  .emoji-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* تحسينات الأزرار العائمة */
+.floating-action-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-action-button:hover {
+  transform: scale(1.1);
+}
+
+/* تحسينات الرسائل الواردة والصادرة */
+.message-in {
+  margin-right: 8px;
+}
+
+.message-out {
+  margin-left: 8px;
+}
+
+/* تحسينات الوقت في الرسائل */
+.message-time {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* تحسينات حالات الرسائل على الهواتف */
+.message-status {
+  font-size: 0.7rem;
+}
+
+/* تحسينات الوسائط على الهواتف */
+.media-container {
+  max-width: 100%;
+}
+
+.upload-overlay {
+  border-radius: 8px;
+}
+
+/* تحسينات الملفات على الهواتف */
+.file-bubble {
+  min-width: 150px;
+  max-width: 100%;
+}
+
+/* تحسينات التسجيلات الصوتية على الهواتف */
+.voice-note-bubble {
+  min-width: 120px;
+  max-width: 70%;
+}
+
+/* تحسينات البحث على الهواتف */
+.chat-search-bar {
+  position: fixed;
+  top: 110px;
+  left: 0;
+  right: 0;
+  z-index: 9996;
+  padding: 10px;
+  background: var(--surface-color);
+}
+
+/* تحسينات القوائم على الهواتف */
+.menu-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface-color);
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 15px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+/* تحسينات المكالمات على الهواتف */
+.call-modal-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  z-index: 10000;
+}
+
+.call-controls {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.call-control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.call-control-btn.call-end {
+  background: #ff4757;
+}
+
+/* تحسينات شريط التمرير على الهواتف */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+}
+
+/* تحسينات الأنيميشن على الهواتف */
+@media (max-width: 768px) {
+  @keyframes messageSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .message {
+    animation-duration: 0.2s;
+  }
+}
+
+/* تحسينات الاستجابة للمس على الهواتف */
+button, 
+[role="button"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* تحسينات النوافذ المنبثقة الكبيرة */
+@media (max-width: 768px) {
+  .modal-content {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* تحسينات شريط الحالة (Status) على الهواتف */
+.status-list {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+}
+
+.status-list::-webkit-scrollbar {
+  display: none;
+}
+
+.status-item {
+  flex-shrink: 0;
+}
+
+/* تحسينات الإشعارات على الهواتف */
+.wave-notification {
+  max-width: 90vw;
+  right: 5vw;
+  animation-duration: 0.3s;
+}
+
+/* تحسينات للشاشات ذات الـ notch */
+@media (max-width: 768px) {
+  .app-container {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .chat-input-container {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+  
+  .floating-action-button {
+    bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}
 .theme-purple {
     --primary-color: #9C27B0;
     --primary-dark: #7B1FA2;
@@ -4211,7 +4930,7 @@ select:focus {
     align-items: center;
     justify-content: center;
     transition: var(--transition);
-    width: 20px;
+    width: 34px;
     height: 34px;
 }
 
